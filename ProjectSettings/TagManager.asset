@@ -14,6 +14,7 @@ TagManager:
   - Closet
   - InventoryGrid
   - ComboArea
+  - Puzzle
   layers:
   - Default
   - TransparentFX

@@ -17,8 +17,10 @@ public class InventoryManager : MonoBehaviour
 {
     public static InventoryManager instance;
 
-    public Transform itemGridContent;
-    public GameObject inventoryItemPrefab;
+    public Transform itemEvidenceContent;
+    public Transform itemPuzzleContent;
+    public GameObject puzzleItemPrefab;
+    public GameObject evidenceItemPrefab;
     public GameObject comboResultPrefab;
     public List<EvidenceSprite> evidenceSpriteList = new List<EvidenceSprite>(); 
     public Dictionary<string, Sprite> evidenceSprites = new Dictionary<string, Sprite>(); 
@@ -43,7 +45,7 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    public void AddEvidenceToInventory(string evidenceName, string itemID = "")
+    public void AddEvidenceToInventory(string evidenceName, string itemID = "", bool isDraggable = false)
     {
         if (!pickedEvidences.Contains(evidenceName))
         {
@@ -51,30 +53,54 @@ public class InventoryManager : MonoBehaviour
 
             if (evidenceSprites.ContainsKey(evidenceName))
             {
-                GameObject newItem = Instantiate(inventoryItemPrefab, itemGridContent);
-                newItem.GetComponent<Image>().sprite = evidenceSprites[evidenceName];
+                // Choose correct prefab and parent container
+                GameObject prefabToUse = isDraggable ? puzzleItemPrefab : evidenceItemPrefab;
+                Transform parentTransform = isDraggable ? itemPuzzleContent : itemEvidenceContent;
 
-                DraggableItem draggable = newItem.AddComponent<DraggableItem>();
-                draggable.itemID = string.IsNullOrEmpty(itemID) ? evidenceName : itemID;
+                // Instantiate the correct prefab
+                GameObject newItem = Instantiate(prefabToUse, parentTransform);
+                Image itemImage = newItem.GetComponent<Image>();
+                itemImage.sprite = evidenceSprites[evidenceName];
+
+                if (isDraggable)
+                {
+                    DraggableItem draggable = newItem.AddComponent<DraggableItem>();
+                    draggable.itemID = string.IsNullOrEmpty(itemID) ? evidenceName : itemID;
+                    draggable.canCombine = CanBeCombined(draggable.itemID);
+                }
+                else
+                {
+                    // Disable raycast target on non-draggable images to prevent any interaction
+                    itemImage.raycastTarget = false;
+                }
             }
         }
     }
 
+
+
+    private bool CanBeCombined(string itemID)
+    {
+        HashSet<string> combinableItems = new HashSet<string> { "itemA", "itemB", "itemC" };
+        return combinableItems.Contains(itemID);
+    }
+
+
     public void CheckCombination(DraggableItem droppedItem)
     {
+        if (!droppedItem.canCombine) return; // Ignore non-combinable items
+
         List<DraggableItem> itemsInComboArea = new List<DraggableItem>();
 
-        // Find all items currently in Combo Area
         foreach (Transform child in GameObject.Find("ComboArea").transform)
         {
             DraggableItem item = child.GetComponent<DraggableItem>();
-            if (item != null)
+            if (item != null && item.canCombine)
             {
                 itemsInComboArea.Add(item);
             }
         }
 
-        // Check for a matching pair
         DraggableItem matchedItem = null;
         foreach (DraggableItem item in itemsInComboArea)
         {
@@ -87,16 +113,16 @@ public class InventoryManager : MonoBehaviour
 
         if (matchedItem != null)
         {
-            // Destroy both original items
             Destroy(droppedItem.gameObject);
             Destroy(matchedItem.gameObject);
 
-            // Instantiate the result item in Combo Area
-            GameObject newItem = Instantiate(inventoryItemPrefab, GameObject.Find("ComboArea").transform);
+            GameObject newItem = Instantiate(puzzleItemPrefab, GameObject.Find("ComboArea").transform);
             newItem.GetComponent<Image>().sprite = GetComboResultSprite(droppedItem.itemID);
-            newItem.AddComponent<DraggableItem>(); // Make it draggable
+            DraggableItem newDraggable = newItem.AddComponent<DraggableItem>();
+            newDraggable.canCombine = false; // Result should not be combinable again
         }
     }
+
 
     private Sprite GetComboResultSprite(string itemID)
     {
@@ -112,7 +138,7 @@ public class InventoryManager : MonoBehaviour
 
     public void ClearInventory()
     {
-        foreach (Transform child in itemGridContent)
+        foreach (Transform child in itemPuzzleContent)
         {
             Destroy(child.gameObject);
         }

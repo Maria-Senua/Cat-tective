@@ -87,7 +87,16 @@ public class AreaActions : MonoBehaviour
             DraggableItem draggable = evidence.GetComponent<DraggableItem>();
             string itemID = draggable != null ? draggable.itemID : evidence.name;
 
-            InventoryManager.instance?.AddEvidenceToInventory(evidence.name, itemID);
+            string evidenceTag = evidence.tag;
+
+            if (evidenceTag == "Puzzle")
+            {
+                InventoryManager.instance?.AddEvidenceToInventory(evidence.name, itemID, true); // Puzzle items are draggable
+            }
+            else
+            {
+                InventoryManager.instance?.AddEvidenceToInventory(evidence.name, itemID, false); // Non-puzzle items are non-draggable
+            }
         }
     }
     

@@ -12,7 +12,8 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     private Transform originalParent;
     private Vector3 originalPosition;
 
-    public string itemID;
+    [HideInInspector] public string itemID;
+    [HideInInspector] public bool canCombine = false;
 
     private void Awake()
     {
@@ -39,21 +40,24 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         canvasGroup.blocksRaycasts = true;
         canvasGroup.alpha = 1f;
 
-        // Check if dropped in Combo Area
+        // Check if dropped in ComboArea
         if (IsPointerOverUIElement("ComboArea"))
         {
             transform.SetParent(GameObject.Find("ComboArea").transform, true);
-
-            // Check for combination logic
             InventoryManager.instance.CheckCombination(this);
         }
-        // If dropped outside Inventory & ComboArea -> Return to original position
-        else if (!IsPointerOverUIElement("InventoryGrid"))
+        // If dropped outside InventoryGrid OR ComboArea, return to original position
+        else if (IsPointerOverUIElement("InventoryGrid"))
+        {
+            transform.position = originalPosition;
+            transform.SetParent(originalParent);
+        } else
         {
             transform.position = originalPosition;
             transform.SetParent(originalParent);
         }
     }
+
 
     private bool IsPointerOverUIElement(string tag)
     {
