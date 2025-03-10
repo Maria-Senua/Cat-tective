@@ -57,6 +57,13 @@ public class InventoryManager : MonoBehaviour
                 GameObject prefabToUse = isDraggable ? puzzleItemPrefab : evidenceItemPrefab;
                 Transform parentTransform = isDraggable ? itemPuzzleContent : itemEvidenceContent;
 
+                // Ensure PlaceholderImage always remains in itemEvidenceContent
+                GameObject placeholder = parentTransform.Find("PlaceholderImage")?.gameObject;
+                if (placeholder != null)
+                {
+                    placeholder.transform.SetAsFirstSibling(); // Keep it at the top
+                }
+
                 // Instantiate the correct prefab
                 GameObject newItem = Instantiate(prefabToUse, parentTransform);
                 Image itemImage = newItem.GetComponent<Image>();
@@ -76,6 +83,7 @@ public class InventoryManager : MonoBehaviour
             }
         }
     }
+
 
 
 
@@ -140,7 +148,10 @@ public class InventoryManager : MonoBehaviour
     {
         foreach (Transform child in itemPuzzleContent)
         {
-            Destroy(child.gameObject);
+            if (child.name != "PlaceholderImage") 
+            {
+                Destroy(child.gameObject);
+            }
         }
         pickedEvidences.Clear();
     }
