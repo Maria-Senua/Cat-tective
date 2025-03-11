@@ -144,7 +144,7 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
             }
             else
             {
-                Debug.LogWarning("Items are not in the correct slots. No update will occur.");
+                Debug.Log("Items are not in the correct slots. No update will occur.");
             }
         }
     }
