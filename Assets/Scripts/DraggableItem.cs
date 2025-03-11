@@ -105,7 +105,7 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         if (isInPart1)
         {
             
-            transform.SetParent(part1.transform, false);
+            transform.SetParent(part1.transform, true);
             Debug.Log(gameObject.name + " assigned to part1");
             InventoryManager.instance.btn1.SetActive(true);
         }
