@@ -10,6 +10,7 @@ public class EvidenceSprite
 {
     public string evidenceName; // should match GameObject of evidence name
     public Sprite evidenceSprite; // corresponding UI sprite
+    public Sprite combinedSprite;
 }
 
 
@@ -22,7 +23,8 @@ public class InventoryManager : MonoBehaviour
     public GameObject puzzleItemPrefab;
     public GameObject evidenceItemPrefab;
     public List<EvidenceSprite> evidenceSpriteList = new List<EvidenceSprite>(); 
-    public Dictionary<string, Sprite> evidenceSprites = new Dictionary<string, Sprite>(); 
+    public Dictionary<string, Sprite> evidenceSprites = new Dictionary<string, Sprite>();
+    private Dictionary<string, Sprite> combinedSprites = new Dictionary<string, Sprite>();  
 
     private List<string> pickedEvidences = new List<string>();
 
@@ -41,7 +43,20 @@ public class InventoryManager : MonoBehaviour
         foreach (var entry in evidenceSpriteList)
         {
             evidenceSprites[entry.evidenceName] = entry.evidenceSprite;
+            if (entry.combinedSprite != null) 
+            {
+                combinedSprites[entry.evidenceName] = entry.combinedSprite;
+            }
         }
+    }
+
+    public Sprite GetCombinedSprite(string evidenceName)
+    {
+        if (combinedSprites.ContainsKey(evidenceName))
+        {
+            return combinedSprites[evidenceName];
+        }
+        return null;
     }
 
     public void AddEvidenceToInventory(string evidenceName, bool isDraggable = false)

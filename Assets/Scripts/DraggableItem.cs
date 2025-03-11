@@ -12,7 +12,7 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     private Transform originalParent;
     private Vector3 originalPosition;
 
-    [SerializeField] private Sprite combinedSprite;
+    private Sprite combinedSprite;
 
     private string _evidenceName;
     public string evidenceName
@@ -41,7 +41,19 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     private void Start()
     {
         Debug.Log(gameObject.name + " has evidenceName: " + evidenceName);
+
+        combinedSprite = InventoryManager.instance.GetCombinedSprite(evidenceName);
+
+        if (combinedSprite != null)
+        {
+            Debug.Log("combinedSprite assigned from InventoryManager: " + combinedSprite.name);
+        }
+        else
+        {
+            Debug.LogError("combinedSprite is NULL! Make sure it's set in InventoryManager's evidenceSpriteList.");
+        }
     }
+
 
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -93,18 +105,7 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         while (part1.GetComponentsInChildren<DraggableItem>().Length == 0 ||
                part2.GetComponentsInChildren<DraggableItem>().Length == 0)
         {
-            yield return null; 
-        }
-
-        Debug.Log("Checking children in part1: ");
-        foreach (Transform child in part1.transform)
-        {
-            Debug.Log("child name 1 " + child.name);
-        }
-        Debug.Log("Checking children in part2:");
-        foreach (Transform child in part2.transform)
-        {
-            Debug.Log("child name 2 " + child.name);
+            yield return null;
         }
 
         DraggableItem[] itemsInPart1 = part1.GetComponentsInChildren<DraggableItem>();
@@ -113,13 +114,17 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         DraggableItem itemInPart1 = itemsInPart1.Length > 0 ? itemsInPart1[0] : null;
         DraggableItem itemInPart2 = itemsInPart2.Length > 0 ? itemsInPart2[0] : null;
 
-        Debug.Log("Final Check - itemInPart1: " + (itemInPart1 != null ? itemInPart1.evidenceName : "NULL"));
-        Debug.Log("Final Check - itemInPart2: " + (itemInPart2 != null ? itemInPart2.evidenceName : "NULL"));
-
         if (itemInPart1 != null && itemInPart2 != null)
         {
-            if ((itemInPart1.evidenceName == "photo1" && itemInPart2.evidenceName == "photo2") ||
-                (itemInPart1.evidenceName == "photo2" && itemInPart2.evidenceName == "photo1"))
+            string name1 = itemInPart1.evidenceName;
+            string name2 = itemInPart2.evidenceName;
+
+            Debug.Log($"Checking {name1} and {name2} for combination...");
+
+            Sprite correctCombinedSprite = InventoryManager.instance.GetCombinedSprite(name1);
+
+            if (correctCombinedSprite != null &&
+                ((name1 == "photo1" && name2 == "photo2") || (name1 == "photo2" && name2 == "photo1")))
             {
                 Debug.Log("Correct items placed! Updating image...");
 
@@ -128,13 +133,22 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
                     Image imageComponent = placeholderImage.GetComponent<Image>();
                     if (imageComponent != null)
                     {
-                        Debug.Log("Placeholder image updated!");
-                        imageComponent.sprite = combinedSprite;
+                        imageComponent.sprite = correctCombinedSprite;
+                        imageComponent.SetNativeSize();
+                        imageComponent.enabled = false;
+                        imageComponent.enabled = true;
+
+                        Debug.Log("Placeholder image updated with: " + correctCombinedSprite.name);
                     }
                 }
             }
+            else
+            {
+                Debug.LogWarning("No matching combined sprite found for this pair.");
+            }
         }
     }
+
 
 
 
