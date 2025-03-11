@@ -119,16 +119,16 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
             string name1 = itemInPart1.evidenceName;
             string name2 = itemInPart2.evidenceName;
 
-            Debug.Log($"Checking {name1} and {name2} for combination...");
+            Debug.Log($"Checking {name1} (in part1) and {name2} (in part2) for combination...");
 
-            Sprite correctCombinedSprite = InventoryManager.instance.GetCombinedSprite(name1);
-
-            if (correctCombinedSprite != null &&
-                ((name1 == "photo1" && name2 == "photo2") || (name1 == "photo2" && name2 == "photo1")))
+            if ((name1 == "photo1" && name2 == "photo2" && itemInPart1.transform.parent == part1.transform && itemInPart2.transform.parent == part2.transform) ||
+                (name1 == "photo2" && name2 == "photo1" && itemInPart1.transform.parent == part2.transform && itemInPart2.transform.parent == part1.transform))
             {
-                Debug.Log("Correct items placed! Updating image...");
+                Debug.Log("Correct items placed in the correct parts! Updating image...");
 
-                if (placeholderImage != null)
+                Sprite correctCombinedSprite = InventoryManager.instance.GetCombinedSprite(name1);
+
+                if (correctCombinedSprite != null && placeholderImage != null)
                 {
                     Image imageComponent = placeholderImage.GetComponent<Image>();
                     if (imageComponent != null)
@@ -144,10 +144,11 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
             }
             else
             {
-                Debug.LogWarning("No matching combined sprite found for this pair.");
+                Debug.LogWarning("Items are not in the correct slots. No update will occur.");
             }
         }
     }
+
 
 
 
