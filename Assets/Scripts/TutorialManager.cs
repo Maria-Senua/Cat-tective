@@ -196,7 +196,7 @@ public class TutorialManager : MonoBehaviour
             ShowNextTutorial(20, standardDelay);
         }
 
-        if (currentIndex == 20 && FindObjectOfType<ScenesController>().inventory.activeInHierarchy)
+        if (Input.GetKeyDown(KeyCode.I) && currentIndex == 20)
         {
             ShowNextTutorial(21, standardDelay);
         }

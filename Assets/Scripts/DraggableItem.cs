@@ -173,7 +173,14 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
                         imageComponent.enabled = false;
                         imageComponent.enabled = true;
 
+                        InventoryManager.instance.btn1.SetActive(false);
+                        InventoryManager.instance.btn2.SetActive(false);
+                      
                         Debug.Log("Placeholder image updated with: " + correctCombinedSprite.name);
+
+                       
+
+
                     }
                 }
             }
@@ -185,6 +192,7 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     }
 
 
+    
 
 
     private bool IsPointerOverUIElement(string tag)

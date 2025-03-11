@@ -23,6 +23,7 @@ public class CatMovement : MonoBehaviour
     private bool isScared = false;
     private bool readyToInvestigate = false;
     private bool isInvestigating = false;
+    private bool isInInventory = false;
     private GameObject currentInvestigationArea;
 
     public Transform playerTrans;
@@ -105,7 +106,7 @@ public class CatMovement : MonoBehaviour
         {
             if (isGrounded)
             {
-                if (!isSunDrunk && !isPlaying && !isScared && !isInvestigating)
+                if (!isSunDrunk && !isPlaying && !isScared && !isInvestigating && !isInInventory)
                 {
                     if (Input.GetKey(KeyCode.W))
                     {
@@ -350,7 +351,7 @@ public class CatMovement : MonoBehaviour
         verticalRotation = Mathf.Clamp(verticalRotation, -verticalRotationLimit, verticalRotationLimit);
         cameraTrans.localRotation = Quaternion.Euler(verticalRotation, 0, 0);
 
-        if (!isSunDrunk && !isPlaying && !isInvestigating)
+        if (!isSunDrunk && !isPlaying && !isInvestigating && !isInInventory)
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
@@ -394,6 +395,12 @@ public class CatMovement : MonoBehaviour
         }
 
         if (catMainCam.isActiveAndEnabled) isInvestigating = false;
+        if (Input.GetKeyDown(KeyCode.I)) isInInventory = true;
+    }
+
+    public void NotInInventory()
+    {
+        isInInventory = false;
     }
 
     void MoveOnGround()

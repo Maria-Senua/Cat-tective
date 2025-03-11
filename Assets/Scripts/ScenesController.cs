@@ -32,7 +32,7 @@ public class ScenesController : MonoBehaviour
     {
         inventory.SetActive(true);
         Cursor.lockState = CursorLockMode.None;
-        Time.timeScale = 0;
+        Time.timeScale = 1;
     }
 
     public void CloseInventory()
