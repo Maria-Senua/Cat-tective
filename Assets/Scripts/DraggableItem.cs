@@ -14,6 +14,8 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     private Sprite combinedSprite;
 
+  
+
     private string _evidenceName;
     public string evidenceName
     {
@@ -58,22 +60,40 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        Debug.Log(gameObject.name + " OnBeginDrag called");
+
         originalParent = transform.parent;
         originalPosition = transform.position;
-        transform.SetParent(originalParent.root); 
+
+        transform.SetParent(originalParent.root, true); 
+        transform.SetAsLastSibling();
         canvasGroup.blocksRaycasts = false;
         canvasGroup.alpha = 0.6f;
+        if (originalParent.TryGetComponent<CanvasGroup>(out CanvasGroup parentGroup))
+        {
+            parentGroup.blocksRaycasts = false;
+        }
     }
+
 
     public void OnDrag(PointerEventData eventData)
     {
+        Debug.Log(gameObject.name + " OnDrag called, position: " + eventData.position);
         rectTransform.position = eventData.position;
     }
+
+
+
 
     public void OnEndDrag(PointerEventData eventData)
     {
         canvasGroup.blocksRaycasts = true;
         canvasGroup.alpha = 1f;
+
+        if (originalParent.TryGetComponent<CanvasGroup>(out CanvasGroup parentGroup))
+        {
+            parentGroup.blocksRaycasts = true;
+        }
 
         GameObject part1 = GameObject.FindGameObjectWithTag("part1");
         GameObject part2 = GameObject.FindGameObjectWithTag("part2");
@@ -84,18 +104,33 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
         if (isInPart1)
         {
-            Debug.Log(gameObject.name + " assigned to part1");
+            
             transform.SetParent(part1.transform, false);
+            Debug.Log(gameObject.name + " assigned to part1");
+            InventoryManager.instance.btn1.SetActive(true);
         }
         else if (isInPart2)
         {
+           
+            transform.SetParent(part2.transform, true);
             Debug.Log(gameObject.name + " assigned to part2");
-            transform.SetParent(part2.transform, false);
+            InventoryManager.instance.btn2.SetActive(true);
         }
-
+        else if (IsPointerOverUIElement("InventoryGrid"))
+        {
+            transform.SetParent(originalParent, true);
+            transform.position = originalPosition;
+            Debug.Log(gameObject.name + " returned to original position");
+        }
+        StartCoroutine(ResetRaycast());
         StartCoroutine(WaitAndCheck(placeholderImage));
     }
-
+    private IEnumerator ResetRaycast()
+    {
+        yield return null;
+        canvasGroup.blocksRaycasts = true;
+        Debug.Log("Raycasts reset!");
+    }
 
     private IEnumerator WaitAndCheck(GameObject placeholderImage)
     {
@@ -148,11 +183,6 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
             }
         }
     }
-
-
-
-
-
 
 
 

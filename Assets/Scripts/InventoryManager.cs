@@ -28,6 +28,9 @@ public class InventoryManager : MonoBehaviour
 
     private List<string> pickedEvidences = new List<string>();
 
+    public GameObject btn1;
+    public GameObject btn2;
+
     private void Awake()
     {
         if (instance == null)
@@ -48,6 +51,8 @@ public class InventoryManager : MonoBehaviour
                 combinedSprites[entry.evidenceName] = entry.combinedSprite;
             }
         }
+        btn1.SetActive(false);
+        btn2.SetActive(false);
     }
 
     public Sprite GetCombinedSprite(string evidenceName)
