@@ -6,20 +6,43 @@ using UnityEngine.UI;
 
 public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-
+    
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
     private Transform originalParent;
     private Vector3 originalPosition;
 
-    [HideInInspector] public string itemID;
-    [HideInInspector] public bool canCombine = false;
+    [SerializeField] private Sprite combinedSprite;
+
+    private string _evidenceName;
+    public string evidenceName
+    {
+        get
+        {
+            if (string.IsNullOrEmpty(_evidenceName))
+            {
+                _evidenceName = gameObject.name;
+            }
+            return _evidenceName;
+        }
+        set
+        {
+            _evidenceName = value; 
+        }
+    }
+
 
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
     }
+
+    private void Start()
+    {
+        Debug.Log(gameObject.name + " has evidenceName: " + evidenceName);
+    }
+
 
     public void OnBeginDrag(PointerEventData eventData)
     {
@@ -40,23 +63,83 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         canvasGroup.blocksRaycasts = true;
         canvasGroup.alpha = 1f;
 
-        // Check if dropped in ComboArea
-        if (IsPointerOverUIElement("ComboArea"))
+        GameObject part1 = GameObject.FindGameObjectWithTag("part1");
+        GameObject part2 = GameObject.FindGameObjectWithTag("part2");
+        GameObject placeholderImage = GameObject.Find("PlaceholderImage");
+
+        bool isInPart1 = part1 != null && IsPointerOverUIElement("part1");
+        bool isInPart2 = part2 != null && IsPointerOverUIElement("part2");
+
+        if (isInPart1)
         {
-            transform.SetParent(GameObject.Find("ComboArea").transform, true);
-            InventoryManager.instance.CheckCombination(this);
+            Debug.Log(gameObject.name + " assigned to part1");
+            transform.SetParent(part1.transform, false);
         }
-        // If dropped outside InventoryGrid OR ComboArea, return to original position
-        else if (IsPointerOverUIElement("InventoryGrid"))
+        else if (isInPart2)
         {
-            transform.position = originalPosition;
-            transform.SetParent(originalParent);
-        } else
+            Debug.Log(gameObject.name + " assigned to part2");
+            transform.SetParent(part2.transform, false);
+        }
+
+        StartCoroutine(WaitAndCheck(placeholderImage));
+    }
+
+
+    private IEnumerator WaitAndCheck(GameObject placeholderImage)
+    {
+        GameObject part1 = GameObject.FindGameObjectWithTag("part1");
+        GameObject part2 = GameObject.FindGameObjectWithTag("part2");
+
+        while (part1.GetComponentsInChildren<DraggableItem>().Length == 0 ||
+               part2.GetComponentsInChildren<DraggableItem>().Length == 0)
         {
-            transform.position = originalPosition;
-            transform.SetParent(originalParent);
+            yield return null; 
+        }
+
+        Debug.Log("Checking children in part1: ");
+        foreach (Transform child in part1.transform)
+        {
+            Debug.Log("child name 1 " + child.name);
+        }
+        Debug.Log("Checking children in part2:");
+        foreach (Transform child in part2.transform)
+        {
+            Debug.Log("child name 2 " + child.name);
+        }
+
+        DraggableItem[] itemsInPart1 = part1.GetComponentsInChildren<DraggableItem>();
+        DraggableItem[] itemsInPart2 = part2.GetComponentsInChildren<DraggableItem>();
+
+        DraggableItem itemInPart1 = itemsInPart1.Length > 0 ? itemsInPart1[0] : null;
+        DraggableItem itemInPart2 = itemsInPart2.Length > 0 ? itemsInPart2[0] : null;
+
+        Debug.Log("Final Check - itemInPart1: " + (itemInPart1 != null ? itemInPart1.evidenceName : "NULL"));
+        Debug.Log("Final Check - itemInPart2: " + (itemInPart2 != null ? itemInPart2.evidenceName : "NULL"));
+
+        if (itemInPart1 != null && itemInPart2 != null)
+        {
+            if ((itemInPart1.evidenceName == "photo1" && itemInPart2.evidenceName == "photo2") ||
+                (itemInPart1.evidenceName == "photo2" && itemInPart2.evidenceName == "photo1"))
+            {
+                Debug.Log("Correct items placed! Updating image...");
+
+                if (placeholderImage != null)
+                {
+                    Image imageComponent = placeholderImage.GetComponent<Image>();
+                    if (imageComponent != null)
+                    {
+                        Debug.Log("Placeholder image updated!");
+                        imageComponent.sprite = combinedSprite;
+                    }
+                }
+            }
         }
     }
+
+
+
+
+
 
 
     private bool IsPointerOverUIElement(string tag)
