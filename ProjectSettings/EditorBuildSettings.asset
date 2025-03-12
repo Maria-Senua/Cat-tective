@@ -6,12 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/MainMenuScene.unity
+    guid: 4e8f24769a85f4d568c8e2fc0caa63d2
+  - enabled: 1
     path: Assets/Scenes/TutorialScene.unity
     guid: 6cbcc9fb1270d47e3a2779b727b70102
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 1
     path: Assets/Scenes/TimeTravelCutScene.unity
     guid: 43b80c82923a5419a8a112e4ba6b9943
+  - enabled: 1
+    path: Assets/Scenes/SampleScene.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects: {}

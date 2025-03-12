@@ -344,12 +344,12 @@ public class CatMovement : MonoBehaviour
         }
         else
         {
-            cameraPivot.Rotate(0, mouseX, 0, Space.World);
+            if (!GameManager.sharedInstance.isGamePaused) cameraPivot.Rotate(0, mouseX, 0, Space.World);
         }
 
         verticalRotation -= mouseY;
         verticalRotation = Mathf.Clamp(verticalRotation, -verticalRotationLimit, verticalRotationLimit);
-        cameraTrans.localRotation = Quaternion.Euler(verticalRotation, 0, 0);
+        if (!GameManager.sharedInstance.isGamePaused) cameraTrans.localRotation = Quaternion.Euler(verticalRotation, 0, 0);
 
         if (!isSunDrunk && !isPlaying && !isInvestigating && !isInInventory)
         {
