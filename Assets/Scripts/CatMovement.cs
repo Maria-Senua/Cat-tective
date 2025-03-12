@@ -367,8 +367,25 @@ public class CatMovement : MonoBehaviour
                 {
                     isOnWall = false;
                     playerRigid.useGravity = true;
-                    playerRigid.AddForce(jumpOff * jumpForce, ForceMode.Impulse);
+
+                    Vector3 jumpDirection = jumpOff; 
+
+                    if (Input.GetKey(KeyCode.D)) 
+                    {
+                        jumpDirection = Vector3.left + jump;
+                    }
+                    else if (Input.GetKey(KeyCode.A)) 
+                    {
+                        jumpDirection = Vector3.right + jump;
+                    }
+                    else if (Input.GetKey(KeyCode.S)) 
+                    {
+                        jumpDirection = Vector3.down;
+                    }
+
+                    playerRigid.AddForce(jumpDirection.normalized * jumpForce, ForceMode.Impulse);
                 }
+
             }
 
 
