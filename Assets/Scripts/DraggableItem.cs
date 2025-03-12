@@ -175,7 +175,7 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
                         InventoryManager.instance.btn1.SetActive(false);
                         InventoryManager.instance.btn2.SetActive(false);
-                      
+                        TutorialManager.sharedInstance.solvedPuzzle = true;
                         Debug.Log("Placeholder image updated with: " + correctCombinedSprite.name);
 
                        

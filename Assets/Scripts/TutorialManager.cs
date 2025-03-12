@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -32,6 +33,7 @@ public class TutorialManager : MonoBehaviour
     [HideInInspector] public bool startPlaying = false;
     [HideInInspector] public bool isScared = false;
     [HideInInspector] public bool isSearching = false;
+    [HideInInspector] public bool solvedPuzzle = false;
     [HideInInspector] public bool foundWatch = false;
 
     private bool isSwitching = false;
@@ -201,8 +203,20 @@ public class TutorialManager : MonoBehaviour
             ShowNextTutorial(21, standardDelay);
         }
 
+        if (solvedPuzzle)
+        {
+            ShowNextTutorial(22, shortDelay);
+        }
+
+        if (currentIndex == 22 && !FindObjectOfType<ScenesController>().inventory.activeInHierarchy)
+        {
+            ShowNextTutorial(23, shortDelay);
+            closetMarker.SetActive(true);
+        }
+
         if (foundWatch)
         {
+            tutorials[23].SetActive(false);
             FindObjectOfType<ScenesController>().ShowTimeTravelScene();
         }
     }

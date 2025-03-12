@@ -101,15 +101,6 @@ public class InventoryManager : MonoBehaviour
     }
 
 
-
-
-   
-
-
-
-
-
-
     public void ClearInventory()
     {
         foreach (Transform child in itemPuzzleContent)
