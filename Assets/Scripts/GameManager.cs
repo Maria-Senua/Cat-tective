@@ -12,7 +12,6 @@ public class GameManager : MonoBehaviour
 
         sharedInstance = this;
 
-        FindObjectOfType<ScenesController>().pauseScreen.SetActive(false);
 
     }
 
@@ -34,7 +33,7 @@ public class GameManager : MonoBehaviour
                 FindObjectOfType<ScenesController>().CloseInventory();
             } else
             {
-                if (isGamePaused)
+                if (FindObjectOfType<ScenesController>().isPaused)
                 {
                     FindObjectOfType<ScenesController>().Resume();
                     Cursor.lockState = CursorLockMode.Locked;
@@ -47,5 +46,15 @@ public class GameManager : MonoBehaviour
             }
             
         }
+
+        if (Input.GetKeyDown(KeyCode.I) && !isGamePaused)
+        {
+            FindObjectOfType<ScenesController>().OpenInventory();
+        }
+    }
+
+    public void TriggerTimeTravelScene()
+    {
+        FindObjectOfType<ScenesController>().ShowTimeTravelScene();
     }
 }

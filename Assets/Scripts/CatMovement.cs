@@ -227,6 +227,8 @@ public class CatMovement : MonoBehaviour
         if (other.gameObject.CompareTag("Closet"))
         {
             TutorialManager.sharedInstance.foundWatch = true;
+            GameManager.sharedInstance.TriggerTimeTravelScene();
+            LevelManager.sharedInstance.NextLevel();
         }
     }
 

@@ -48,6 +48,7 @@ public class TutorialManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        LevelManager.sharedInstance.isTutorial = true;
         ActivateTutorial(0);
     }
 
@@ -217,7 +218,7 @@ public class TutorialManager : MonoBehaviour
         if (foundWatch)
         {
             tutorials[23].SetActive(false);
-            FindObjectOfType<ScenesController>().ShowTimeTravelScene();
+            
         }
     }
 

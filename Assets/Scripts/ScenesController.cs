@@ -7,34 +7,11 @@ public class ScenesController : MonoBehaviour
 {
     public GameObject inventory; //leave public, used in other scripts if active in hierarchy
 
-    public GameObject pauseScreen;
+    [SerializeField] GameObject pauseScreen;
 
     public bool isPaused = false;
     //public Camera catCamera;
 
-    private void Awake()
-    {
-        Time.timeScale = 1f; 
-        
-    }
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-       
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.I) && !isPaused)
-        {
-            OpenInventory();
-        }
-
-        
-    }
 
     public void Pause()
     {
@@ -53,13 +30,13 @@ public class ScenesController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    public void OpenTutorialScene()
+    public void StartTutorial()
     {
-        Time.timeScale = 1f; 
-       
-        Cursor.lockState = CursorLockMode.Locked;
-
+        LevelManager.sharedInstance.SetLevel(1);
+        LevelManager.sharedInstance.StartSelectedLevel();
         SceneManager.LoadScene("TutorialScene");
+        Cursor.lockState = CursorLockMode.Locked;
+        Time.timeScale = 1f;  
     }
 
     public void ShowTimeTravelScene()
@@ -85,8 +62,8 @@ public class ScenesController : MonoBehaviour
 
     public void GoToMenu()
     {
-     
-        Cursor.lockState = CursorLockMode.None;
         SceneManager.LoadScene("MainMenuScene");
+        Cursor.lockState = CursorLockMode.None;
+        Time.timeScale = 1;
     }
 }
