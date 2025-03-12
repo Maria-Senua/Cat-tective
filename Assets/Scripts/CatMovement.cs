@@ -398,12 +398,10 @@ public class CatMovement : MonoBehaviour
 
         if (catMainCam.isActiveAndEnabled) isInvestigating = false;
         if (Input.GetKeyDown(KeyCode.I)) isInInventory = true;
+        isInInventory = GameManager.sharedInstance.inventoryOpen;
     }
 
-    public void NotInInventory()
-    {
-        isInInventory = false;
-    }
+   
 
     void MoveOnGround()
     {

@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager sharedInstance;
     public bool isGamePaused;
+    public bool inventoryOpen = false;
 
     private void Awake()
     {
@@ -51,6 +52,8 @@ public class GameManager : MonoBehaviour
         {
             FindObjectOfType<ScenesController>().OpenInventory();
         }
+
+        inventoryOpen = FindObjectOfType<ScenesController>().inventory.activeInHierarchy;
     }
 
     public void TriggerTimeTravelScene()

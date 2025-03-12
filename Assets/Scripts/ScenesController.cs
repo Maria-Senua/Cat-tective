@@ -11,7 +11,31 @@ public class ScenesController : MonoBehaviour
 
     public bool isPaused = false;
     //public Camera catCamera;
+    public float timeTravelTime;
+    Scene currentScene;
+    private string sceneName;
 
+    private void Awake()
+    {
+        currentScene = SceneManager.GetActiveScene();
+        sceneName = currentScene.name;
+    }
+
+    private void Start()
+    {
+        Resume();
+    }
+
+    private void Update()
+    {
+        if (sceneName == "TimeTravelCutScene")
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            timeTravelTime -= Time.deltaTime;
+
+            if (timeTravelTime <= 0) StartCrimeLevel();
+        }
+    }
 
     public void Pause()
     {
@@ -35,6 +59,7 @@ public class ScenesController : MonoBehaviour
         LevelManager.sharedInstance.SetLevel(1);
         LevelManager.sharedInstance.StartSelectedLevel();
         SceneManager.LoadScene("TutorialScene");
+        pauseScreen.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
         Time.timeScale = 1f;  
     }
@@ -44,6 +69,13 @@ public class ScenesController : MonoBehaviour
         InventoryManager.instance.ClearInventory();
         SceneManager.LoadScene("TimeTravelCutScene");
         Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    public void StartCrimeLevel()
+    {
+        SceneManager.LoadScene("SampleScene");
+        Cursor.lockState = CursorLockMode.Locked;
+        Time.timeScale = 1f;
     }
 
     public void OpenInventory()
@@ -62,8 +94,15 @@ public class ScenesController : MonoBehaviour
 
     public void GoToMenu()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene("MainMenuScene");
         Cursor.lockState = CursorLockMode.None;
-        Time.timeScale = 1;
+        
+    }
+
+    public void QuitGame()
+    {
+        Debug.Log("Quitting game...");
+        Application.Quit();
     }
 }

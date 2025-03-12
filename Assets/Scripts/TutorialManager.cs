@@ -49,6 +49,7 @@ public class TutorialManager : MonoBehaviour
     void Start()
     {
         LevelManager.sharedInstance.isTutorial = true;
+        currentIndex = 0;
         ActivateTutorial(0);
     }
 
@@ -172,11 +173,6 @@ public class TutorialManager : MonoBehaviour
             ShowNextTutorial(17, standardDelay);
             tableSearchArea.SetActive(true);
             tableSearchMarker.SetActive(true);
-
-            //FOR THE VERY LAST
-            //ShowNextTutorial(16, standardDelay);
-            //closetMarker.SetActive(true);
-            //closetTrigger.SetActive(true);
         }
 
         AreaActions tableAreaScript = tableSearchArea.GetComponent<AreaActions>();
@@ -213,6 +209,7 @@ public class TutorialManager : MonoBehaviour
         {
             ShowNextTutorial(23, shortDelay);
             closetMarker.SetActive(true);
+            closetTrigger.SetActive(true);
         }
 
         if (foundWatch)
