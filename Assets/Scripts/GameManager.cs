@@ -10,10 +10,15 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-
-        sharedInstance = this;
-
-
+        if (sharedInstance == null)
+        {
+            sharedInstance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     // Start is called before the first frame update
@@ -50,6 +55,7 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.I) && !isGamePaused)
         {
+            Debug.Log("opening inv " + FindObjectOfType<ScenesController>().inventory.activeInHierarchy);
             FindObjectOfType<ScenesController>().OpenInventory();
         }
 

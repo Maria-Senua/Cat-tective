@@ -73,7 +73,7 @@ public class ScenesController : MonoBehaviour
 
     public void StartCrimeLevel()
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("CrimeScene");
         Cursor.lockState = CursorLockMode.Locked;
         Time.timeScale = 1f;
     }
