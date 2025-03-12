@@ -178,7 +178,8 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
                         TutorialManager.sharedInstance.solvedPuzzle = true;
                         Debug.Log("Placeholder image updated with: " + correctCombinedSprite.name);
 
-                       
+
+                        GameManager.sharedInstance.WaitForInventoryClose(itemInPart1, itemInPart2);
 
 
                     }
@@ -192,7 +193,6 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     }
 
 
-    
 
 
     private bool IsPointerOverUIElement(string tag)

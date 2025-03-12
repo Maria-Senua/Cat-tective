@@ -66,4 +66,22 @@ public class GameManager : MonoBehaviour
     {
         FindObjectOfType<ScenesController>().ShowTimeTravelScene();
     }
+
+    public void WaitForInventoryClose(DraggableItem item1, DraggableItem item2)
+    {
+        StartCoroutine(WaitForInventoryCloseCoroutine(item1, item2));
+    }
+
+    private IEnumerator WaitForInventoryCloseCoroutine(DraggableItem item1, DraggableItem item2)
+    {
+        while (inventoryOpen)
+        {
+            yield return null; 
+        }
+
+        if (item1 != null) item1.gameObject.SetActive(false);
+        if (item2 != null) item2.gameObject.SetActive(false);
+        Debug.Log("Inventory closed, items disabled.");
+    }
+
 }
