@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CatMovement : MonoBehaviour
 {
@@ -25,6 +26,8 @@ public class CatMovement : MonoBehaviour
     private bool isInvestigating = false;
     private bool isInInventory = false;
     private GameObject currentInvestigationArea;
+
+    public Image foolBar;
 
     public Transform playerTrans;
     public Transform cameraTrans;
@@ -66,6 +69,7 @@ public class CatMovement : MonoBehaviour
         jumpForward = Vector3.forward;
         initialSoberTime = soberUpTime;
         initialBeSeriousTime = beSeriousTime;
+        foolBar.gameObject.SetActive(false);
     }
 
     void FixedUpdate()
@@ -192,6 +196,7 @@ public class CatMovement : MonoBehaviour
 
         if (other.gameObject.CompareTag("Sun"))
         {
+            foolBar.gameObject.SetActive(true);
             isSunDrunk = true;
             TutorialManager.sharedInstance.startChilling = true;
             //trigger chill anim
@@ -201,6 +206,7 @@ public class CatMovement : MonoBehaviour
 
         if (other.gameObject.CompareTag("Play"))
         {
+            foolBar.gameObject.SetActive(true);
             isPlaying = true;
             //other.gameObject.SetActive(false);
             TutorialManager.sharedInstance.startPlaying = true;
@@ -236,6 +242,7 @@ public class CatMovement : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Sun"))
         {
+            foolBar.gameObject.SetActive(false);
             isSunDrunk = false;
             TutorialManager.sharedInstance.startChilling = false;
             soberUpTime = initialSoberTime;
@@ -252,6 +259,11 @@ public class CatMovement : MonoBehaviour
         {
             readyToInvestigate = false;
             currentInvestigationArea = null; 
+        }
+
+        if (other.gameObject.CompareTag("Play"))
+        {
+            foolBar.gameObject.SetActive(false);
         }
     }
 
@@ -528,7 +540,7 @@ public class CatMovement : MonoBehaviour
                 chainStarted = false;
             }
         }
-
+        foolBar.fillAmount = timer / initialTimer;
         if (timer <= 0)
         {
             onZero?.Invoke(); // Trigger event when timer hits zero
