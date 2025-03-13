@@ -96,7 +96,7 @@ public class CatMovement : MonoBehaviour
 
                 playerRigid.AddForce(transform.up * walk_speed, ForceMode.Force);
                 isClimbing = true; // Set climbing flag to true
-                TutorialManager.sharedInstance.startClimbing = true;
+                if (LevelManager.sharedInstance.currentLevel != 2) TutorialManager.sharedInstance.startClimbing = true;
             }
             else
             {
@@ -206,7 +206,7 @@ public class CatMovement : MonoBehaviour
             foolBar.gameObject.SetActive(true);
             isPlaying = true;
             //other.gameObject.SetActive(false);
-            TutorialManager.sharedInstance.startPlaying = true;
+            if (LevelManager.sharedInstance.currentLevel != 2) TutorialManager.sharedInstance.startPlaying = true;
             //trigger play anim
             playerAnim.SetTrigger("SitDown");
             playerAnim.SetTrigger("Sitting");
@@ -215,7 +215,7 @@ public class CatMovement : MonoBehaviour
         if (other.gameObject.CompareTag("Snake"))
         {
             isScared = true;
-            TutorialManager.sharedInstance.isScared = true;
+            if (LevelManager.sharedInstance.currentLevel != 2) TutorialManager.sharedInstance.isScared = true;
 
             Vector3 direction = (transform.position - other.transform.position).normalized;
             playerRigid.AddForce(direction * 15.0f, ForceMode.Impulse);
@@ -229,7 +229,7 @@ public class CatMovement : MonoBehaviour
 
         if (other.gameObject.CompareTag("Closet"))
         {
-            TutorialManager.sharedInstance.foundWatch = true;
+            if (LevelManager.sharedInstance.currentLevel != 2) TutorialManager.sharedInstance.foundWatch = true;
             GameManager.sharedInstance.TriggerTimeTravelScene();
             LevelManager.sharedInstance.NextLevel();
         }
@@ -246,14 +246,14 @@ public class CatMovement : MonoBehaviour
             }
             foolBar.gameObject.SetActive(false);
             isSunDrunk = false;
-            TutorialManager.sharedInstance.startChilling = false;
+            if (LevelManager.sharedInstance.currentLevel != 2) TutorialManager.sharedInstance.startChilling = false;
             soberUpTime = initialSoberTime;
         }
        
         if (other.gameObject.CompareTag("Snake"))
         {
             isScared = false;
-            TutorialManager.sharedInstance.isScared = false;
+            if (LevelManager.sharedInstance.currentLevel != 2) TutorialManager.sharedInstance.isScared = false;
 
         }
 
@@ -275,7 +275,7 @@ public class CatMovement : MonoBehaviour
 
         foolBar.gameObject.SetActive(true);
         isSunDrunk = true;
-        TutorialManager.sharedInstance.startChilling = true;
+        if (LevelManager.sharedInstance.currentLevel != 2) TutorialManager.sharedInstance.startChilling = true;
 
         // Trigger chill animations
         playerAnim.SetTrigger("SitDown");
@@ -431,7 +431,7 @@ public class CatMovement : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))
             {
                 isInvestigating = true;
-                TutorialManager.sharedInstance.isSearching = true;
+                if (LevelManager.sharedInstance.currentLevel != 2) TutorialManager.sharedInstance.isSearching = true;
                 AreaActions areaScript = currentInvestigationArea.GetComponent<AreaActions>();
                 if (areaScript != null)
                 {
@@ -574,8 +574,8 @@ public class CatMovement : MonoBehaviour
         playerAnim.SetTrigger("StandUp");
         playerAnim.SetTrigger("Idle");
         isPlaying = false;
-        
-        TutorialManager.sharedInstance.startPlaying = false;
+
+        if (LevelManager.sharedInstance.currentLevel != 2) TutorialManager.sharedInstance.startPlaying = false;
         beSeriousTime = initialBeSeriousTime;
     }
 }
