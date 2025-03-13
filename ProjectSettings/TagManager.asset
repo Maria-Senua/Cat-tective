@@ -17,6 +17,10 @@ TagManager:
   - Puzzle
   - part1
   - part2
+  - partA
+  - partB
+  - partC
+  - partD
   layers:
   - Default
   - TransparentFX

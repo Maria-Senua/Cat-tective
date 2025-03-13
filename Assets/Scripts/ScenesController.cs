@@ -73,6 +73,14 @@ public class ScenesController : MonoBehaviour
 
     public void StartCrimeLevel()
     {
+        Debug.Log("Current Level: " + LevelManager.sharedInstance.currentLevel);
+        Debug.Log("Is Tutorial? " + LevelManager.sharedInstance.isTutorial);
+        Debug.Log("Picked Evidence Count: " + InventoryManager.instance.pickedEvidences.Count);
+
+
+        LevelManager.sharedInstance.ResetLevelState();
+        InventoryManager.instance.ResetInventoryState();
+
         SceneManager.LoadScene("CrimeScene");
         Cursor.lockState = CursorLockMode.Locked;
         Time.timeScale = 1f;

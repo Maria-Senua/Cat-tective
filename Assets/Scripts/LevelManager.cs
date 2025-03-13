@@ -58,19 +58,35 @@ public class LevelManager : MonoBehaviour
     public void NextLevel()
     {
         isTutorial = false;
+
         if (currentLevel < maxLevels)
         {
             currentLevel++;
             UnlockLevel(currentLevel);
             Debug.Log($"Advanced to next mission: {currentLevel}.");
 
+            if (currentLevel > 1)
+            {
+                ResetLevelState(); // Switch off tutorial mode for all future levels
+                InventoryManager.instance.ResetInventoryState();
+                InventoryManager.instance.ClearInventory();
+                ResetDraggableItems();
+            }
+
+            Debug.Log($"Advanced to next mission: {currentLevel}.");
         }
         else
         {
             Debug.LogWarning("No more missions to unlock. Reached maxMissions.");
         }
-        Debug.Log("mission " + currentLevel);
     }
+
+
+    public void ResetLevelState()
+    {
+        isTutorial = false;
+    }
+
 
     public void UnlockLevel(int level)
     {
@@ -97,4 +113,17 @@ public class LevelManager : MonoBehaviour
     {
         return new List<int>(unlockedLevels);
     }
+
+    public void ResetDraggableItems()
+    {
+        DraggableItem[] draggableItems = FindObjectsOfType<DraggableItem>();
+
+        foreach (DraggableItem item in draggableItems)
+        {
+            Destroy(item.gameObject);  // 🔥 Destroy any leftover tutorial items
+        }
+
+        Debug.Log("🗑️ Old draggable items fully destroyed!");
+    }
+
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -56,6 +57,8 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         }
     }
 
+ 
+
 
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -95,26 +98,40 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
             parentGroup.blocksRaycasts = true;
         }
 
-        GameObject part1 = GameObject.FindGameObjectWithTag("part1");
-        GameObject part2 = GameObject.FindGameObjectWithTag("part2");
         GameObject placeholderImage = GameObject.Find("PlaceholderImage");
 
-        bool isInPart1 = part1 != null && IsPointerOverUIElement("part1");
-        bool isInPart2 = part2 != null && IsPointerOverUIElement("part2");
+        if (LevelManager.sharedInstance.isTutorial)
+        {
+            HandleDragForParts("part1", "part2", InventoryManager.instance.btn1, InventoryManager.instance.btn2);
+        }
+        else
+        {
+            HandleDragForParts("partA", "partB", "partC", "partD", InventoryManager.instance.btnA, InventoryManager.instance.btnB, InventoryManager.instance.btnC, InventoryManager.instance.btnD);
+        }
+
+        StartCoroutine(ResetRaycast());
+        StartCoroutine(WaitAndCheck(placeholderImage));
+    }
+
+    private void HandleDragForParts(string partTag1, string partTag2, GameObject btn1, GameObject btn2)
+    {
+        GameObject part1 = GameObject.FindGameObjectWithTag(partTag1);
+        GameObject part2 = GameObject.FindGameObjectWithTag(partTag2);
+
+        bool isInPart1 = part1 != null && IsPointerOverUIElement(partTag1);
+        bool isInPart2 = part2 != null && IsPointerOverUIElement(partTag2);
 
         if (isInPart1)
         {
-            
             transform.SetParent(part1.transform, true);
-            Debug.Log(gameObject.name + " assigned to part1");
-            InventoryManager.instance.btn1.SetActive(true);
+            Debug.Log(gameObject.name + " assigned to " + partTag1);
+            btn1.SetActive(true);
         }
         else if (isInPart2)
         {
-           
             transform.SetParent(part2.transform, true);
-            Debug.Log(gameObject.name + " assigned to part2");
-            InventoryManager.instance.btn2.SetActive(true);
+            Debug.Log(gameObject.name + " assigned to " + partTag2);
+            btn2.SetActive(true);
         }
         else if (IsPointerOverUIElement("InventoryGrid"))
         {
@@ -122,9 +139,31 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
             transform.position = originalPosition;
             Debug.Log(gameObject.name + " returned to original position");
         }
-        StartCoroutine(ResetRaycast());
-        StartCoroutine(WaitAndCheck(placeholderImage));
     }
+
+    private void HandleDragForParts(string partTagA, string partTagB, string partTagC, string partTagD, GameObject btnA, GameObject btnB, GameObject btnC, GameObject btnD)
+    {
+        GameObject partA = GameObject.FindGameObjectWithTag(partTagA);
+        GameObject partB = GameObject.FindGameObjectWithTag(partTagB);
+        GameObject partC = GameObject.FindGameObjectWithTag(partTagC);
+        GameObject partD = GameObject.FindGameObjectWithTag(partTagD);
+
+        bool isInPartA = partA != null && IsPointerOverUIElement(partTagA);
+        bool isInPartB = partB != null && IsPointerOverUIElement(partTagB);
+        bool isInPartC = partC != null && IsPointerOverUIElement(partTagC);
+        bool isInPartD = partD != null && IsPointerOverUIElement(partTagD);
+
+        if (isInPartA) transform.SetParent(partA.transform, true);
+        if (isInPartB) transform.SetParent(partB.transform, true);
+        if (isInPartC) transform.SetParent(partC.transform, true);
+        if (isInPartD) transform.SetParent(partD.transform, true);
+
+        btnA.SetActive(isInPartA);
+        btnB.SetActive(isInPartB);
+        btnC.SetActive(isInPartC);
+        btnD.SetActive(isInPartD);
+    }
+
     private IEnumerator ResetRaycast()
     {
         yield return null;
@@ -134,66 +173,76 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     private IEnumerator WaitAndCheck(GameObject placeholderImage)
     {
-        GameObject part1 = GameObject.FindGameObjectWithTag("part1");
-        GameObject part2 = GameObject.FindGameObjectWithTag("part2");
+        string[] partTags = LevelManager.sharedInstance.isTutorial
+            ? new[] { "part1", "part2" }
+            : new[] { "partA", "partB", "partC", "partD" };
 
-        while (part1.GetComponentsInChildren<DraggableItem>().Length == 0 ||
-               part2.GetComponentsInChildren<DraggableItem>().Length == 0)
+        while (!AllPartsFilled(partTags))
         {
             yield return null;
         }
 
-        DraggableItem[] itemsInPart1 = part1.GetComponentsInChildren<DraggableItem>();
-        DraggableItem[] itemsInPart2 = part2.GetComponentsInChildren<DraggableItem>();
+        Debug.Log("Correct items placed! Combining...");
+        List<DraggableItem> items = GetDraggableItemsInParts(partTags);
 
-        DraggableItem itemInPart1 = itemsInPart1.Length > 0 ? itemsInPart1[0] : null;
-        DraggableItem itemInPart2 = itemsInPart2.Length > 0 ? itemsInPart2[0] : null;
+        string combinedName = items[0].evidenceName; 
 
-        if (itemInPart1 != null && itemInPart2 != null)
+        Sprite correctCombinedSprite = InventoryManager.instance.GetCombinedSprite(combinedName);
+
+        if (correctCombinedSprite != null && placeholderImage != null)
         {
-            string name1 = itemInPart1.evidenceName;
-            string name2 = itemInPart2.evidenceName;
-
-            Debug.Log($"Checking {name1} (in part1) and {name2} (in part2) for combination...");
-
-            if ((name1 == "photo1" && name2 == "photo2" && itemInPart1.transform.parent == part1.transform && itemInPart2.transform.parent == part2.transform) ||
-                (name1 == "photo2" && name2 == "photo1" && itemInPart1.transform.parent == part2.transform && itemInPart2.transform.parent == part1.transform))
+            Image imageComponent = placeholderImage.GetComponent<Image>();
+            if (imageComponent != null)
             {
-                Debug.Log("Correct items placed in the correct parts! Updating image...");
+                imageComponent.enabled = false; // Force Unity to refresh UI
+                imageComponent.sprite = correctCombinedSprite;
+                imageComponent.SetNativeSize();
+                imageComponent.enabled = true;
+                Debug.Log("upd image " + correctCombinedSprite.name);
 
-                Sprite correctCombinedSprite = InventoryManager.instance.GetCombinedSprite(name1);
-
-                if (correctCombinedSprite != null && placeholderImage != null)
+                if (LevelManager.sharedInstance.isTutorial)
                 {
-                    Image imageComponent = placeholderImage.GetComponent<Image>();
-                    if (imageComponent != null)
-                    {
-                        imageComponent.sprite = correctCombinedSprite;
-                        imageComponent.SetNativeSize();
-                        imageComponent.enabled = false;
-                        imageComponent.enabled = true;
-
-                        InventoryManager.instance.btn1.SetActive(false);
-                        InventoryManager.instance.btn2.SetActive(false);
-                        TutorialManager.sharedInstance.solvedPuzzle = true;
-                        Debug.Log("Placeholder image updated with: " + correctCombinedSprite.name);
-
-
-                        GameManager.sharedInstance.WaitForInventoryClose(itemInPart1, itemInPart2);
-
-
-                    }
+                    InventoryManager.instance.btn1.SetActive(false);
+                    InventoryManager.instance.btn2.SetActive(false);
+                    TutorialManager.sharedInstance.solvedPuzzle = true;
+                } else
+                {
+                    InventoryManager.instance.btnA.SetActive(false);
+                    InventoryManager.instance.btnB.SetActive(false);
+                    InventoryManager.instance.btnC.SetActive(false);
+                    InventoryManager.instance.btnD.SetActive(false);
                 }
-            }
-            else
-            {
-                Debug.Log("Items are not in the correct slots. No update will occur.");
             }
         }
     }
 
+    private List<DraggableItem> GetDraggableItemsInParts(string[] partTags)
+    {
+        List<DraggableItem> items = new List<DraggableItem>();
+
+        foreach (string tag in partTags)
+        {
+            GameObject part = GameObject.FindGameObjectWithTag(tag);
+            if (part != null)
+            {
+                items.AddRange(part.GetComponentsInChildren<DraggableItem>());
+            }
+        }
+
+        return items;
+    }
 
 
+    private bool AllPartsFilled(string[] partTags)
+    {
+        foreach (var tag in partTags)
+        {
+            GameObject part = GameObject.FindGameObjectWithTag(tag);
+            if (part.GetComponentsInChildren<DraggableItem>().Length == 0)
+                return false;
+        }
+        return true;
+    }
 
     private bool IsPointerOverUIElement(string tag)
     {

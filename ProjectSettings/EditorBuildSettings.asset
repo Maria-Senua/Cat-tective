@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CrimeScene.unity
     guid: 6a27fd1d947394cb9a91e76f28b5d0ee
+  - enabled: 1
+    path: Assets/Scenes/TatortScene.unity
+    guid: 84746afd280334538ba0439c58a0185d
   m_configObjects: {}

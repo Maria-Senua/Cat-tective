@@ -34,6 +34,11 @@ public class PartClickHandler : MonoBehaviour
                 if (transform.tag == "part1") InventoryManager.instance.btn1.SetActive(false);
                 if (transform.tag == "part2") InventoryManager.instance.btn2.SetActive(false);
 
+                if (transform.tag == "partA") InventoryManager.instance.btnA.SetActive(false);
+                if (transform.tag == "partB") InventoryManager.instance.btnB.SetActive(false);
+                if (transform.tag == "partC") InventoryManager.instance.btnC.SetActive(false);
+                if (transform.tag == "partD") InventoryManager.instance.btnD.SetActive(false);
+
                 return; 
             }
         }

@@ -26,10 +26,13 @@ public class InventoryManager : MonoBehaviour
     public Dictionary<string, Sprite> evidenceSprites = new Dictionary<string, Sprite>();
     private Dictionary<string, Sprite> combinedSprites = new Dictionary<string, Sprite>();  
 
-    private List<string> pickedEvidences = new List<string>();
+    [HideInInspector] public List<string> pickedEvidences = new List<string>();
 
-    public GameObject btn1;
-    public GameObject btn2;
+    public GameObject btn1, btn2;
+    public GameObject btnA, btnB, btnC, btnD;
+
+    public GameObject part1, part2;
+    public GameObject partA, partB, partC, partD;
 
     private void Awake()
     {
@@ -53,6 +56,31 @@ public class InventoryManager : MonoBehaviour
         }
         btn1.SetActive(false);
         btn2.SetActive(false);
+
+        btnA.SetActive(false);
+        btnB.SetActive(false);
+        btnC.SetActive(false);
+        btnD.SetActive(false);
+
+        if (LevelManager.sharedInstance.currentLevel != 2)
+        {
+            part1.SetActive(true);
+            part2.SetActive(true);
+
+            partA.SetActive(false);
+            partB.SetActive(false);
+            partC.SetActive(false);
+            partD.SetActive(false);
+        } else
+        {
+            part1.SetActive(false);
+            part2.SetActive(false);
+
+            partA.SetActive(true);
+            partB.SetActive(true);
+            partC.SetActive(true);
+            partD.SetActive(true);
+        }
     }
 
     public Sprite GetCombinedSprite(string evidenceName)
@@ -112,4 +140,22 @@ public class InventoryManager : MonoBehaviour
         }
         pickedEvidences.Clear();
     }
+
+    public void ResetInventoryState()
+    {
+        pickedEvidences.Clear(); 
+        combinedSprites.Clear(); 
+        ClearInventory();        
+
+        btn1.SetActive(false);
+        btn2.SetActive(false);
+        btnA.SetActive(false);
+        btnB.SetActive(false);
+        btnC.SetActive(false);
+        btnD.SetActive(false);
+
+        Debug.Log("Inventory fully reset.");
+    }
+
+
 }
