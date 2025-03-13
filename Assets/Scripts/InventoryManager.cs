@@ -62,6 +62,11 @@ public class InventoryManager : MonoBehaviour
         btnC.SetActive(false);
         btnD.SetActive(false);
 
+      
+    }
+
+    private void Update()
+    {
         if (LevelManager.sharedInstance.currentLevel != 2)
         {
             part1.SetActive(true);
@@ -71,7 +76,8 @@ public class InventoryManager : MonoBehaviour
             partB.SetActive(false);
             partC.SetActive(false);
             partD.SetActive(false);
-        } else
+        }
+        else
         {
             part1.SetActive(false);
             part2.SetActive(false);
