@@ -121,100 +121,81 @@ public class TutorialManager : MonoBehaviour
             if (currentIndex == 10)
             {
                 ShowNextTutorial(11, standardDelay);
-                snakeMarker.SetActive(true);
-                cucumber.SetActive(true);
+                investigationMarker.SetActive(true); //add to the marker img text press E
+                investigationArea.SetActive(true);
+                photoPart.SetActive(true);
             }
         }
 
-        if (isScared)
-        {
-            if (currentIndex == 11)
-            {
-                ShowNextTutorial(12, shortDelay);
-                snakeMarker.SetActive(false);
-            }
-        } else
-        {
-            if (currentIndex == 12)
-            {
-                ShowNextTutorial(13, standardDelay);
-            }
-        }
+      
 
         AreaActions areaScript = investigationArea.GetComponent<AreaActions>();
 
-        if (currentIndex == 13)
-        {
-            ShowNextTutorial(14, standardDelay);
-            investigationMarker.SetActive(true); //add to the marker img text press E
-            investigationArea.SetActive(true);
-            photoPart.SetActive(true);
-            
-        }
+   
 
-        if (currentIndex == 14 && isSearching) 
+        if (currentIndex == 11 && isSearching) 
         {
             areaScript.closeBtn.SetActive(false);
-            ShowNextTutorial(15, standardDelay);
+            ShowNextTutorial(12, standardDelay);
             investigationMarker.SetActive(false);
         }
 
-        if (currentIndex == 15 && areaScript.pickedEvidence)
+        if (currentIndex == 12 && areaScript.pickedEvidence)
         {
-            ShowNextTutorial(16, standardDelay);
+            ShowNextTutorial(13, standardDelay);
             areaScript.closeBtn.SetActive(true);
         }
 
         
 
-        if (!areaScript.isDisplayed && currentIndex == 16)
+        if (!areaScript.isDisplayed && currentIndex == 13)
         {
             isSearching = false;
-            ShowNextTutorial(17, standardDelay);
+            ShowNextTutorial(14, standardDelay);
             tableSearchArea.SetActive(true);
             tableSearchMarker.SetActive(true);
         }
 
         AreaActions tableAreaScript = tableSearchArea.GetComponent<AreaActions>();
 
-        if (currentIndex == 17 && isSearching) 
+        if (currentIndex == 14 && isSearching) 
         {
             tableAreaScript.closeBtn.SetActive(false);
-            ShowNextTutorial(18, standardDelay);
+            ShowNextTutorial(15, standardDelay);
             tableSearchMarker.SetActive(false);
         }
 
-        if (currentIndex == 18 && tableAreaScript.pickedEvidence)
+        if (currentIndex == 15 && tableAreaScript.pickedEvidence)
         {
-            ShowNextTutorial(19, standardDelay);
+            ShowNextTutorial(16, standardDelay);
             tableAreaScript.closeBtn.SetActive(true);
         }
 
-        if (currentIndex == 19 && !tableAreaScript.isDisplayed)
+        if (currentIndex == 16 && !tableAreaScript.isDisplayed)
         {
-            ShowNextTutorial(20, standardDelay);
+            ShowNextTutorial(17, standardDelay);
         }
 
-        if (Input.GetKeyDown(KeyCode.I) && currentIndex == 20)
+        if (Input.GetKeyDown(KeyCode.I) && currentIndex == 17)
         {
-            ShowNextTutorial(21, standardDelay);
+            ShowNextTutorial(18, standardDelay);
         }
 
         if (solvedPuzzle)
         {
-            ShowNextTutorial(22, shortDelay);
+            ShowNextTutorial(19, shortDelay);
         }
 
-        if (currentIndex == 22 && !FindObjectOfType<ScenesController>().inventory.activeInHierarchy)
+        if (currentIndex == 19 && !FindObjectOfType<ScenesController>().inventory.activeInHierarchy)
         {
-            ShowNextTutorial(23, shortDelay);
+            ShowNextTutorial(20, shortDelay);
             closetMarker.SetActive(true);
             closetTrigger.SetActive(true);
         }
 
         if (foundWatch)
         {
-            tutorials[23].SetActive(false);
+            tutorials[20].SetActive(false);
             
         }
     }
