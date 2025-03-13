@@ -27,6 +27,8 @@ public class CatMovement : MonoBehaviour
     private bool isInInventory = false;
     private GameObject currentInvestigationArea;
 
+    private Coroutine sunCoroutine;
+
     public Image foolBar;
 
     public Transform playerTrans;
@@ -196,12 +198,7 @@ public class CatMovement : MonoBehaviour
 
         if (other.gameObject.CompareTag("Sun"))
         {
-            foolBar.gameObject.SetActive(true);
-            isSunDrunk = true;
-            TutorialManager.sharedInstance.startChilling = true;
-            //trigger chill anim
-            playerAnim.SetTrigger("SitDown");
-            playerAnim.SetTrigger("Sitting");
+            sunCoroutine = StartCoroutine(SunDrunkRoutine());
         }
 
         if (other.gameObject.CompareTag("Play"))
@@ -242,6 +239,11 @@ public class CatMovement : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Sun"))
         {
+            if (sunCoroutine != null)
+            {
+                StopCoroutine(sunCoroutine);
+                sunCoroutine = null;
+            }
             foolBar.gameObject.SetActive(false);
             isSunDrunk = false;
             TutorialManager.sharedInstance.startChilling = false;
@@ -265,6 +267,19 @@ public class CatMovement : MonoBehaviour
         {
             foolBar.gameObject.SetActive(false);
         }
+    }
+
+    private IEnumerator SunDrunkRoutine()
+    {
+        yield return new WaitForSeconds(2f); 
+
+        foolBar.gameObject.SetActive(true);
+        isSunDrunk = true;
+        TutorialManager.sharedInstance.startChilling = true;
+
+        // Trigger chill animations
+        playerAnim.SetTrigger("SitDown");
+        playerAnim.SetTrigger("Sitting");
     }
 
     private IEnumerator LerpVault(Vector3 targetPos, float duration)
