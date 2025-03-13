@@ -89,7 +89,7 @@ public class TutorialManager : MonoBehaviour
         {
             if (currentIndex == 5)
             {
-                ShowNextTutorial(6, standardDelay);
+                ShowNextTutorial(6, shortDelay);
                 sunMarker.SetActive(false);
             } else if (currentIndex == 6)
             {
@@ -99,7 +99,7 @@ public class TutorialManager : MonoBehaviour
         {
             if (currentIndex == 7)
             {
-                ShowNextTutorial(8, standardDelay);
+                ShowNextTutorial(8, shortDelay);
                 playMarker.SetActive(true);
                 ball.SetActive(true);
             }
@@ -109,7 +109,7 @@ public class TutorialManager : MonoBehaviour
         {
             if (currentIndex == 8)
             {
-                ShowNextTutorial(9, standardDelay);
+                ShowNextTutorial(9, shortDelay);
                 playMarker.SetActive(false);
             }
             else if (currentIndex == 9)
@@ -120,7 +120,7 @@ public class TutorialManager : MonoBehaviour
         {
             if (currentIndex == 10)
             {
-                ShowNextTutorial(11, standardDelay);
+                ShowNextTutorial(11, shortDelay);
                 investigationMarker.SetActive(true); //add to the marker img text press E
                 investigationArea.SetActive(true);
                 photoPart.SetActive(true);
@@ -136,13 +136,13 @@ public class TutorialManager : MonoBehaviour
         if (currentIndex == 11 && isSearching) 
         {
             areaScript.closeBtn.SetActive(false);
-            ShowNextTutorial(12, standardDelay);
+            ShowNextTutorial(12, shortDelay);
             investigationMarker.SetActive(false);
         }
 
         if (currentIndex == 12 && areaScript.pickedEvidence)
         {
-            ShowNextTutorial(13, standardDelay);
+            ShowNextTutorial(13, shortDelay);
             areaScript.closeBtn.SetActive(true);
         }
 
@@ -151,7 +151,7 @@ public class TutorialManager : MonoBehaviour
         if (!areaScript.isDisplayed && currentIndex == 13)
         {
             isSearching = false;
-            ShowNextTutorial(14, standardDelay);
+            ShowNextTutorial(14, shortDelay);
             tableSearchArea.SetActive(true);
             tableSearchMarker.SetActive(true);
         }
@@ -161,24 +161,24 @@ public class TutorialManager : MonoBehaviour
         if (currentIndex == 14 && isSearching) 
         {
             tableAreaScript.closeBtn.SetActive(false);
-            ShowNextTutorial(15, standardDelay);
+            ShowNextTutorial(15, shortDelay);
             tableSearchMarker.SetActive(false);
         }
 
         if (currentIndex == 15 && tableAreaScript.pickedEvidence)
         {
-            ShowNextTutorial(16, standardDelay);
+            ShowNextTutorial(16, shortDelay);
             tableAreaScript.closeBtn.SetActive(true);
         }
 
         if (currentIndex == 16 && !tableAreaScript.isDisplayed)
         {
-            ShowNextTutorial(17, standardDelay);
+            ShowNextTutorial(17, shortDelay);
         }
 
         if (Input.GetKeyDown(KeyCode.I) && currentIndex == 17)
         {
-            ShowNextTutorial(18, standardDelay);
+            ShowNextTutorial(18, shortDelay);
         }
 
         if (solvedPuzzle)
