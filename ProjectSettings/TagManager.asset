@@ -21,6 +21,7 @@ TagManager:
   - partB
   - partC
   - partD
+  - Reader
   layers:
   - Default
   - TransparentFX

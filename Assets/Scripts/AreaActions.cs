@@ -81,12 +81,16 @@ public class AreaActions : MonoBehaviour
 
         if (Input.GetMouseButtonDown(1))
         {
-            evidence.SetActive(false);
-            pickedEvidence = true;
+            string evidenceTag = evidence.tag;
 
+            if (evidenceTag != "Reader")
+            {
+                evidence.SetActive(false);
+                pickedEvidence = true;
+            }
+                
             DraggableItem draggable = evidence.GetComponent<DraggableItem>();
 
-            string evidenceTag = evidence.tag;
 
             if (evidenceTag == "Puzzle")
             {
