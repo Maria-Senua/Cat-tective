@@ -11,6 +11,8 @@ public class AreaActions : MonoBehaviour
     public GameObject closeBtn;
     [HideInInspector] public bool isDisplayed;
     [HideInInspector] public bool pickedEvidence;
+    public GameObject newsMarker;
+    public GameObject clockTrigger;
 
     public GameObject[] evidences;
     private GameObject currentEvidence;
@@ -77,6 +79,21 @@ public class AreaActions : MonoBehaviour
             {
                 evidence.transform.GetChild(1).gameObject.SetActive(true);
             }
+            if (evidence.tag == "Reader")
+            {
+                if (LevelManager.sharedInstance.currentLevel == 1)
+                {
+                    if (!newsMarker.activeInHierarchy)
+                    {
+                        newsMarker.SetActive(true);
+                    }
+                    else
+                    {
+                        clockTrigger.SetActive(true);
+                    }
+                }
+            }
+            
         }
 
         if (Input.GetMouseButtonDown(1))

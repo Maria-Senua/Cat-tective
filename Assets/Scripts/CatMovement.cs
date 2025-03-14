@@ -238,6 +238,11 @@ public class CatMovement : MonoBehaviour
             GameManager.sharedInstance.TriggerTimeTravelScene();
             LevelManager.sharedInstance.NextLevel();
         }
+        if (other.gameObject.CompareTag("Clock"))
+        {
+            GameManager.sharedInstance.TriggerCrimeScene();
+            LevelManager.sharedInstance.NextLevel();
+        }
     }
 
     private void OnTriggerExit(Collider other)
