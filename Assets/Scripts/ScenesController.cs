@@ -33,7 +33,7 @@ public class ScenesController : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             timeTravelTime -= Time.deltaTime;
 
-            if (timeTravelTime <= 0) StartCrimeLevel();
+            if (timeTravelTime <= 0) OpenEmptyScene();
         }
     }
 
@@ -73,15 +73,18 @@ public class ScenesController : MonoBehaviour
 
     public void StartCrimeLevel()
     {
-        Debug.Log("Current Level: " + LevelManager.sharedInstance.currentLevel);
-        Debug.Log("Is Tutorial? " + LevelManager.sharedInstance.isTutorial);
-        Debug.Log("Picked Evidence Count: " + InventoryManager.instance.pickedEvidences.Count);
-
-
+        
         LevelManager.sharedInstance.ResetLevelState();
         InventoryManager.instance.ResetInventoryState();
 
         SceneManager.LoadScene("CrimeScene");
+        Cursor.lockState = CursorLockMode.Locked;
+        Time.timeScale = 1f;
+    }
+
+    public void OpenEmptyScene()
+    {
+        SceneManager.LoadScene("EmptyScene");
         Cursor.lockState = CursorLockMode.Locked;
         Time.timeScale = 1f;
     }

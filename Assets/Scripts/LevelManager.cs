@@ -8,7 +8,7 @@ public class LevelManager : MonoBehaviour
     public static LevelManager sharedInstance;
 
     public int currentLevel = 1;
-    public int maxLevels = 2;
+    public int maxLevels = 3;
     public int selectedLevel = 1;
 
     private HashSet<int> unlockedLevels = new HashSet<int> { 1 };

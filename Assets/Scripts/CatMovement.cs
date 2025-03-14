@@ -114,6 +114,7 @@ public class CatMovement : MonoBehaviour
             {
                 if (!isSunDrunk && !isPlaying && !isScared && !isInvestigating && !isInInventory)
                 {
+                    Debug.Log("moving forward " + isGrounded);
                     if (Input.GetKey(KeyCode.W))
                     {
                         velocity.x = transform.forward.x * walk_speed * Time.deltaTime;
@@ -126,6 +127,9 @@ public class CatMovement : MonoBehaviour
                     }
                 }
                 
+            } else
+            {
+                Debug.Log("not moving forward " + isGrounded);
             }
 
             playerRigid.velocity = velocity;
@@ -164,6 +168,7 @@ public class CatMovement : MonoBehaviour
         {
             isGrounded = true;
             playerRigid.useGravity = true;
+            Debug.Log("moving in collision");
         }
 
         if (!isGrounded)
@@ -215,7 +220,7 @@ public class CatMovement : MonoBehaviour
         if (other.gameObject.CompareTag("Snake"))
         {
             isScared = true;
-            if (LevelManager.sharedInstance.currentLevel != 2) TutorialManager.sharedInstance.isScared = true;
+            if (LevelManager.sharedInstance.currentLevel == 1) TutorialManager.sharedInstance.isScared = true;
 
             Vector3 direction = (transform.position - other.transform.position).normalized;
             playerRigid.AddForce(direction * 15.0f, ForceMode.Impulse);
@@ -229,7 +234,7 @@ public class CatMovement : MonoBehaviour
 
         if (other.gameObject.CompareTag("Closet"))
         {
-            if (LevelManager.sharedInstance.currentLevel != 2) TutorialManager.sharedInstance.foundWatch = true;
+            if (LevelManager.sharedInstance.currentLevel == 1) TutorialManager.sharedInstance.foundWatch = true;
             GameManager.sharedInstance.TriggerTimeTravelScene();
             LevelManager.sharedInstance.NextLevel();
         }
@@ -246,14 +251,14 @@ public class CatMovement : MonoBehaviour
             }
             foolBar.gameObject.SetActive(false);
             isSunDrunk = false;
-            if (LevelManager.sharedInstance.currentLevel != 2) TutorialManager.sharedInstance.startChilling = false;
+            if (LevelManager.sharedInstance.currentLevel == 1) TutorialManager.sharedInstance.startChilling = false;
             soberUpTime = initialSoberTime;
         }
        
         if (other.gameObject.CompareTag("Snake"))
         {
             isScared = false;
-            if (LevelManager.sharedInstance.currentLevel != 2) TutorialManager.sharedInstance.isScared = false;
+            if (LevelManager.sharedInstance.currentLevel == 1) TutorialManager.sharedInstance.isScared = false;
 
         }
 
@@ -275,7 +280,7 @@ public class CatMovement : MonoBehaviour
 
         foolBar.gameObject.SetActive(true);
         isSunDrunk = true;
-        if (LevelManager.sharedInstance.currentLevel != 2) TutorialManager.sharedInstance.startChilling = true;
+        if (LevelManager.sharedInstance.currentLevel == 1) TutorialManager.sharedInstance.startChilling = true;
 
         // Trigger chill animations
         playerAnim.SetTrigger("SitDown");
@@ -431,7 +436,7 @@ public class CatMovement : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))
             {
                 isInvestigating = true;
-                if (LevelManager.sharedInstance.currentLevel != 2) TutorialManager.sharedInstance.isSearching = true;
+                if (LevelManager.sharedInstance.currentLevel == 1) TutorialManager.sharedInstance.isSearching = true;
                 AreaActions areaScript = currentInvestigationArea.GetComponent<AreaActions>();
                 if (areaScript != null)
                 {
@@ -575,7 +580,7 @@ public class CatMovement : MonoBehaviour
         playerAnim.SetTrigger("Idle");
         isPlaying = false;
 
-        if (LevelManager.sharedInstance.currentLevel != 2) TutorialManager.sharedInstance.startPlaying = false;
+        if (LevelManager.sharedInstance.currentLevel == 1) TutorialManager.sharedInstance.startPlaying = false;
         beSeriousTime = initialBeSeriousTime;
     }
 }
