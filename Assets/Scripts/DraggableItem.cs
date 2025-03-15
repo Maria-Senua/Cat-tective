@@ -158,10 +158,11 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         if (isInPartC) transform.SetParent(partC.transform, true);
         if (isInPartD) transform.SetParent(partD.transform, true);
 
-        btnA.SetActive(isInPartA);
-        btnB.SetActive(isInPartB);
-        btnC.SetActive(isInPartC);
-        btnD.SetActive(isInPartD);
+        if (isInPartA) btnA.SetActive(true);
+        if (isInPartB) btnB.SetActive(true);
+        if (isInPartC) btnC.SetActive(true);
+        if (isInPartD) btnD.SetActive(true);
+
     }
 
     private IEnumerator ResetRaycast()
