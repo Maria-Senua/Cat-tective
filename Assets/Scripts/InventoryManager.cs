@@ -22,6 +22,9 @@ public class InventoryManager : MonoBehaviour
     public Transform itemPuzzleContent;
     public GameObject puzzleItemPrefab;
     public GameObject evidenceItemPrefab;
+    public Sprite defaultPlaceholderSprite; // Assign this in Unity Inspector
+    public Image placeholderImage; // Also assign this in Inspector
+
     public List<EvidenceSprite> evidenceSpriteList = new List<EvidenceSprite>(); 
     public Dictionary<string, Sprite> evidenceSprites = new Dictionary<string, Sprite>();
     private Dictionary<string, Sprite> combinedSprites = new Dictionary<string, Sprite>();  
@@ -109,11 +112,11 @@ public class InventoryManager : MonoBehaviour
                 GameObject prefabToUse = isDraggable ? puzzleItemPrefab : evidenceItemPrefab;
                 Transform parentTransform = isDraggable ? itemPuzzleContent : itemEvidenceContent;
 
-                GameObject placeholder = parentTransform.Find("PlaceholderImage")?.gameObject;
-                if (placeholder != null)
-                {
-                    placeholder.transform.SetAsFirstSibling(); 
-                }
+                //GameObject placeholder = parentTransform.Find("PlaceholderImage")?.gameObject;
+                //if (placeholder != null)
+                //{
+                //    placeholder.transform.SetAsFirstSibling(); 
+                //}
 
                 GameObject newItem = Instantiate(prefabToUse, parentTransform);
                 Image itemImage = newItem.GetComponent<Image>();
@@ -159,6 +162,14 @@ public class InventoryManager : MonoBehaviour
         btnB.SetActive(false);
         btnC.SetActive(false);
         btnD.SetActive(false);
+
+        if (placeholderImage != null)
+        {
+            placeholderImage.enabled = false;
+            placeholderImage.sprite = defaultPlaceholderSprite;
+            placeholderImage.SetNativeSize();
+            placeholderImage.enabled = true;
+        }
 
         Debug.Log("Inventory fully reset.");
     }

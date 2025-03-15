@@ -98,7 +98,7 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
             parentGroup.blocksRaycasts = true;
         }
 
-        GameObject placeholderImage = GameObject.Find("PlaceholderImage");
+        //GameObject placeholderImage = GameObject.Find("PlaceholderImage");
 
         if (LevelManager.sharedInstance.currentLevel == 1)
         {
@@ -110,7 +110,7 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         }
 
         StartCoroutine(ResetRaycast());
-        StartCoroutine(WaitAndCheck(placeholderImage));
+        StartCoroutine(WaitAndCheck(InventoryManager.instance.placeholderImage.gameObject));
     }
 
     private void HandleDragForParts(string partTag1, string partTag2, GameObject btn1, GameObject btn2)
@@ -182,39 +182,76 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
             yield return null;
         }
 
-        Debug.Log("Correct items placed! Combining...");
-        List<DraggableItem> items = GetDraggableItemsInParts(partTags);
-
-        string combinedName = items[0].evidenceName; 
-
-        Sprite correctCombinedSprite = InventoryManager.instance.GetCombinedSprite(combinedName);
-
-        if (correctCombinedSprite != null && placeholderImage != null)
+        if (IsCorrectCombination(partTags))
         {
-            Image imageComponent = placeholderImage.GetComponent<Image>();
-            if (imageComponent != null)
-            {
-                imageComponent.enabled = false; // Force Unity to refresh UI
-                imageComponent.sprite = correctCombinedSprite;
-                imageComponent.SetNativeSize();
-                imageComponent.enabled = true;
-                Debug.Log("upd image " + correctCombinedSprite.name);
+            List<DraggableItem> items = GetDraggableItemsInParts(partTags);
+            string combinedName = items[0].evidenceName;
 
-                if (LevelManager.sharedInstance.currentLevel == 1)
+            Sprite correctCombinedSprite = InventoryManager.instance.GetCombinedSprite(combinedName);
+
+            if (correctCombinedSprite != null && placeholderImage != null)
+            {
+                Image imageComponent = placeholderImage.GetComponent<Image>();
+                if (imageComponent != null)
                 {
-                    InventoryManager.instance.btn1.SetActive(false);
-                    InventoryManager.instance.btn2.SetActive(false);
-                    TutorialManager.sharedInstance.solvedPuzzle = true;
-                } else
-                {
-                    InventoryManager.instance.btnA.SetActive(false);
-                    InventoryManager.instance.btnB.SetActive(false);
-                    InventoryManager.instance.btnC.SetActive(false);
-                    InventoryManager.instance.btnD.SetActive(false);
+                    imageComponent.enabled = false;
+                    imageComponent.sprite = correctCombinedSprite;
+                    imageComponent.SetNativeSize();
+                    imageComponent.enabled = true;
+
+                    Debug.Log("Correct puzzle solved!");
+
+                    if (LevelManager.sharedInstance.currentLevel == 1)
+                    {
+                        InventoryManager.instance.btn1.SetActive(false);
+                        InventoryManager.instance.btn2.SetActive(false);
+                        TutorialManager.sharedInstance.solvedPuzzle = true;
+                    }
+                    else
+                    {
+                        InventoryManager.instance.btnA.SetActive(false);
+                        InventoryManager.instance.btnB.SetActive(false);
+                        InventoryManager.instance.btnC.SetActive(false);
+                        InventoryManager.instance.btnD.SetActive(false);
+                    }
                 }
             }
         }
+        else
+        {
+            Debug.Log("Wrong combination. Not updating placeholder.");
+        }
     }
+
+
+    private bool IsCorrectCombination(string[] partTags)
+    {
+        string[] correctEvidence = LevelManager.sharedInstance.currentLevel == 1
+            ? new[] { "photo1", "photo2" }
+            : new[] { "photoA", "photoB", "photoC", "photoD" };
+
+        for (int i = 0; i < partTags.Length; i++)
+        {
+            if (!CheckEvidenceInPart(correctEvidence[i], partTags[i]))
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+
+    private bool CheckEvidenceInPart(string evidenceName, string partTag)
+    {
+        GameObject part = GameObject.FindGameObjectWithTag(partTag);
+        if (part == null) return false;
+
+        DraggableItem[] itemsInPart = part.GetComponentsInChildren<DraggableItem>();
+
+        return itemsInPart.Any(item => item.evidenceName == evidenceName);
+    }
+
 
     private List<DraggableItem> GetDraggableItemsInParts(string[] partTags)
     {

@@ -1702,7 +1702,6 @@ MonoBehaviour:
   subCamera: {fileID: 1847311994}
   catCamera: {fileID: 963194227}
   catsBody: {fileID: 2120620829}
-  closeBtn: {fileID: 614422349}
   isDisplayed: 0
   pickedEvidence: 0
   newsMarker: {fileID: 1742867067}
@@ -4775,7 +4774,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &614422350
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7831,7 +7830,6 @@ MonoBehaviour:
   subCamera: {fileID: 2042521618}
   catCamera: {fileID: 963194227}
   catsBody: {fileID: 2120620829}
-  closeBtn: {fileID: 614422349}
   isDisplayed: 0
   pickedEvidence: 0
   newsMarker: {fileID: 0}
@@ -9307,7 +9305,6 @@ MonoBehaviour:
   subCamera: {fileID: 1719605684}
   catCamera: {fileID: 963194227}
   catsBody: {fileID: 2120620829}
-  closeBtn: {fileID: 614422349}
   isDisplayed: 0
   pickedEvidence: 0
   newsMarker: {fileID: 0}
@@ -11844,7 +11841,6 @@ MonoBehaviour:
   subCamera: {fileID: 919570950}
   catCamera: {fileID: 963194227}
   catsBody: {fileID: 2120620829}
-  closeBtn: {fileID: 614422349}
   isDisplayed: 0
   pickedEvidence: 0
   newsMarker: {fileID: 1742867067}
@@ -13853,6 +13849,8 @@ MonoBehaviour:
   itemPuzzleContent: {fileID: 913383234}
   puzzleItemPrefab: {fileID: 6637431085883623474, guid: 2a944fc5e77b94795aac2f2694672b98, type: 3}
   evidenceItemPrefab: {fileID: 8450608221267019092, guid: 0c2f94432e884414598bd3a45b7f81aa, type: 3}
+  defaultPlaceholderSprite: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
+  placeholderImage: {fileID: 1116983605}
   evidenceSpriteList:
   - evidenceName: photo1
     evidenceSprite: {fileID: 21300000, guid: 6fef50a53c2b345a4920b036132f0b3f, type: 3}
@@ -16629,7 +16627,6 @@ MonoBehaviour:
   subCamera: {fileID: 710509604}
   catCamera: {fileID: 963194227}
   catsBody: {fileID: 2120620829}
-  closeBtn: {fileID: 614422349}
   isDisplayed: 0
   pickedEvidence: 0
   newsMarker: {fileID: 0}
