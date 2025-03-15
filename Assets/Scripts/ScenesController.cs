@@ -12,6 +12,7 @@ public class ScenesController : MonoBehaviour
     public bool isPaused = false;
     //public Camera catCamera;
     public float timeTravelTime;
+    public float finalVideoTime = 4f;
     Scene currentScene;
     private string sceneName;
 
@@ -34,6 +35,13 @@ public class ScenesController : MonoBehaviour
             timeTravelTime -= Time.deltaTime;
 
             if (timeTravelTime <= 0) OpenEmptyScene();
+        }
+        if (sceneName == "FinalCutScene")
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            finalVideoTime -= Time.deltaTime;
+
+            if (finalVideoTime <= 0) GoToMenu();
         }
     }
 
