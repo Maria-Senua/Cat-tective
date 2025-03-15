@@ -214,6 +214,8 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
                         InventoryManager.instance.btnB.SetActive(false);
                         InventoryManager.instance.btnC.SetActive(false);
                         InventoryManager.instance.btnD.SetActive(false);
+
+                        EvidenceManager.instance.photoFound = true;
                     }
                 }
             }

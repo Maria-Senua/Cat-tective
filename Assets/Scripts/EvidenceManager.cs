@@ -15,6 +15,7 @@ public class EvidenceManager : MonoBehaviour
 {
     public static EvidenceManager instance;
     public List<EvidenceCheck> evidenceSpriteList = new List<EvidenceCheck>();
+    [HideInInspector] public bool photoFound;
 
     private void Awake()
     {
@@ -33,6 +34,17 @@ public class EvidenceManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (photoFound) PhotoCheckMark();
+    }
+
+    void PhotoCheckMark()
+    {
+        var photoEvidence = evidenceSpriteList[3];
+       
+            if (photoEvidence.evidence.sprite == photoEvidence.uncheckedSprite)
+            {
+                photoEvidence.evidence.sprite = photoEvidence.checkedSprite;
+            }
         
     }
 }
