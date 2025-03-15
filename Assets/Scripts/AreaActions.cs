@@ -127,6 +127,14 @@ public class AreaActions : MonoBehaviour
             else
             {
                 InventoryManager.instance?.AddEvidenceToInventory(evidence.name, false); // Non-puzzle items are non-draggable
+                foreach (var evidenceCheck in EvidenceManager.instance.evidenceSpriteList)
+                {
+                    if (evidenceCheck.evidence.sprite == evidenceCheck.uncheckedSprite)
+                    {
+                        evidenceCheck.evidence.sprite = evidenceCheck.checkedSprite;
+                        break; // Stop after finding the first match
+                    }
+                }
             }
         }
     }
