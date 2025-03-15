@@ -100,7 +100,7 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
         GameObject placeholderImage = GameObject.Find("PlaceholderImage");
 
-        if (LevelManager.sharedInstance.isTutorial)
+        if (LevelManager.sharedInstance.currentLevel == 1)
         {
             HandleDragForParts("part1", "part2", InventoryManager.instance.btn1, InventoryManager.instance.btn2);
         }
@@ -173,7 +173,7 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     private IEnumerator WaitAndCheck(GameObject placeholderImage)
     {
-        string[] partTags = LevelManager.sharedInstance.isTutorial
+        string[] partTags = LevelManager.sharedInstance.currentLevel == 1
             ? new[] { "part1", "part2" }
             : new[] { "partA", "partB", "partC", "partD" };
 
@@ -200,7 +200,7 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
                 imageComponent.enabled = true;
                 Debug.Log("upd image " + correctCombinedSprite.name);
 
-                if (LevelManager.sharedInstance.isTutorial)
+                if (LevelManager.sharedInstance.currentLevel == 1)
                 {
                     InventoryManager.instance.btn1.SetActive(false);
                     InventoryManager.instance.btn2.SetActive(false);

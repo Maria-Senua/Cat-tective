@@ -67,7 +67,7 @@ public class InventoryManager : MonoBehaviour
 
     private void Update()
     {
-        if (LevelManager.sharedInstance.currentLevel != 2)
+        if (LevelManager.sharedInstance.currentLevel == 1)
         {
             part1.SetActive(true);
             part2.SetActive(true);

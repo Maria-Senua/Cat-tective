@@ -2316,7 +2316,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentLevel: 1
-  maxLevels: 2
+  maxLevels: 3
   selectedLevel: 1
   isTutorial: 0
 --- !u!4 &355630726

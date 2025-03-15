@@ -68,7 +68,7 @@ public class ScenesController : MonoBehaviour
     {
         InventoryManager.instance.ClearInventory();
         SceneManager.LoadScene("TimeTravelCutScene");
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void StartCrimeLevel()
@@ -76,16 +76,19 @@ public class ScenesController : MonoBehaviour
         
         LevelManager.sharedInstance.ResetLevelState();
         InventoryManager.instance.ResetInventoryState();
-
+        LevelManager.sharedInstance.SetLevel(3);
+        LevelManager.sharedInstance.StartSelectedLevel();
         SceneManager.LoadScene("CrimeScene");
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.lockState = CursorLockMode.Locked;
         Time.timeScale = 1f;
     }
 
     public void OpenEmptyScene()
     {
+        LevelManager.sharedInstance.SetLevel(2);
+        LevelManager.sharedInstance.StartSelectedLevel();
         SceneManager.LoadScene("EmptyScene");
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.lockState = CursorLockMode.Locked;
         Time.timeScale = 1f;
     }
 
@@ -93,6 +96,7 @@ public class ScenesController : MonoBehaviour
     {
         inventory.SetActive(true);
         Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         Time.timeScale = 1;
     }
 

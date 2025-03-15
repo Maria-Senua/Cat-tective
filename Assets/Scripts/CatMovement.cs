@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class CatMovement : MonoBehaviour
@@ -61,7 +62,7 @@ public class CatMovement : MonoBehaviour
 
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.lockState = CursorLockMode.Locked;
         playerRigid = GetComponent<Rigidbody>();
         vaultLayer = LayerMask.NameToLayer("VaultLayer");
         vaultLayer = ~vaultLayer;
@@ -436,18 +437,29 @@ public class CatMovement : MonoBehaviour
             ReturnToNormalState(ref beSeriousTime, initialBeSeriousTime, ref isPlaying, () => BecomeSerious());
         }
 
-        if (readyToInvestigate && currentInvestigationArea != null)
+        if (readyToInvestigate)
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                isInvestigating = true;
-                if (LevelManager.sharedInstance.currentLevel == 1 && TutorialManager.sharedInstance != null) TutorialManager.sharedInstance.isSearching = true;
-                AreaActions areaScript = currentInvestigationArea.GetComponent<AreaActions>();
-                if (areaScript != null)
+                if (currentInvestigationArea != null)
                 {
-                    areaScript.ActivateView();
+                    Debug.Log("AREAACTION current area " + currentInvestigationArea.name);
+                    isInvestigating = true;
+                    if (LevelManager.sharedInstance.currentLevel == 1 && TutorialManager.sharedInstance != null) TutorialManager.sharedInstance.isSearching = true;
+                    AreaActions areaScript = currentInvestigationArea.GetComponent<AreaActions>();
+                    if (areaScript != null)
+                    {
+                        areaScript.ActivateView();
+                        Debug.Log("AREAACTION script ");
+                    }
+                    
+                }
+                else
+                {
+                    Debug.Log("AREAACTION no game object");
                 }
             }
+            
         }
 
         if (catMainCam.isActiveAndEnabled) isInvestigating = false;

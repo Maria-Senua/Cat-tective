@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.EventSystems;
 
 public class AreaActions : MonoBehaviour
 {
     public Camera subCamera;
     public Camera catCamera;
     public GameObject catsBody;
-    public GameObject closeBtn;
+    //public GameObject closeBtn;
     [HideInInspector] public bool isDisplayed;
     [HideInInspector] public bool pickedEvidence;
     public GameObject newsMarker;
@@ -23,12 +24,19 @@ public class AreaActions : MonoBehaviour
         DeactivateView();
     }
 
+ 
+
     // Update is called once per frame
     void Update()
     {
         if (isDisplayed) 
         {
             DetectMouseOverEvidence();
+
+            if (Input.GetKeyDown(KeyCode.X))
+            {
+                DeactivateView();
+            }
         }
     }
 
@@ -81,7 +89,7 @@ public class AreaActions : MonoBehaviour
             }
             if (evidence.tag == "Reader")
             {
-                if (LevelManager.sharedInstance.currentLevel == 1)
+                if (LevelManager.sharedInstance.currentLevel == 2)
                 {
                     if (!newsMarker.activeInHierarchy)
                     {
@@ -131,39 +139,82 @@ public class AreaActions : MonoBehaviour
 
     public void ActivateView()
     {
+        DebugTest(1);
+        subCamera.enabled = true; //yes
+        DebugTest(2);
+        catCamera.enabled = false; //yes
+        DebugTest(3);
+        Cursor.lockState = CursorLockMode.None; //yes
+        DebugTest(4);
+        Cursor.visible = true; //yes
+        DebugTest(5);
+        //closeBtn.SetActive(true); //no
+        DebugTest(6);
+        catsBody.SetActive(false); //no
+        DebugTest(7);
         isDisplayed = true;
-        subCamera.enabled = true;
-        catCamera.enabled = false;
-        catsBody.SetActive(false);
-        closeBtn.SetActive(true);
-        Cursor.lockState = CursorLockMode.None;
+        DebugTest(8);
+        //ActivateCloseButton(DeactivateView);
+    }
 
-        ActivateCloseButton(DeactivateView);
+  
+    public void DebugTest(int test)
+    {
+        Debug.Log("AREAACTION test num: " + test);
+        Debug.Log("AREAACTION subCamera: " + subCamera.enabled);
+        Debug.Log("AREAACTION catCamera: " + catCamera.enabled);
+        Debug.Log("AREAACTION Cursor LockState: " + Cursor.lockState);
+        Debug.Log("AREAACTION Cursor Visible: " + Cursor.visible);
+
+        //Debug.Log("AREAACTION closeBtn: " + (closeBtn != null));
+        Debug.Log("AREAACTION catsBody: " + (catsBody != null));
+        Debug.Log("AREAACTION isDisplayed: " + isDisplayed);
+        //Debug.Log("AREAACTION CLOSE BTN IS ACTIVE IN HIERARCHY? " + (closeBtn.activeInHierarchy));
+
+
     }
 
     public void DeactivateView()
     {
-        isDisplayed = false;
         subCamera.enabled = false;
         catCamera.enabled = true;
-        catsBody.SetActive(true);
-        closeBtn.SetActive(false);
+
         Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
+        catsBody.SetActive(true);
+        //closeBtn.SetActive(false);
+        
+        
+        isDisplayed = false;
     }
 
-
-    void ActivateCloseButton(Action method)
-    {
-        if (closeBtn != null)
-        {
-            var button = closeBtn.GetComponent<UnityEngine.UI.Button>();
-            if (button != null)
-            {
-
-                button.onClick.AddListener(new UnityEngine.Events.UnityAction(method));
+   
 
 
-            }
-        }
-    }
+
+    //void ActivateCloseButton(Action method)
+    //{
+    //    if (closeBtn != null)
+    //    {
+    //        var button = closeBtn.GetComponent<UnityEngine.UI.Button>();
+    //        if (button != null)
+    //        {
+    //            button.onClick.RemoveAllListeners();
+    //            button.onClick.AddListener(new UnityEngine.Events.UnityAction(method));
+
+
+    //        }
+    //    }
+
+    //    if (closeBtn == null)
+    //    {
+    //        Debug.LogError("AREAACTION Close Button is NULL");
+    //    }
+    //    else
+    //    {
+    //        Debug.Log("AREAACTION Close Button is Assigned!");
+    //    }
+
+    //}
 }

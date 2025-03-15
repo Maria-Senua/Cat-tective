@@ -135,7 +135,7 @@ public class TutorialManager : MonoBehaviour
 
         if (currentIndex == 11 && isSearching) 
         {
-            areaScript.closeBtn.SetActive(false);
+            //areaScript.closeBtn.SetActive(false);
             ShowNextTutorial(12, shortDelay);
             investigationMarker.SetActive(false);
         }
@@ -143,7 +143,7 @@ public class TutorialManager : MonoBehaviour
         if (currentIndex == 12 && areaScript.pickedEvidence)
         {
             ShowNextTutorial(13, shortDelay);
-            areaScript.closeBtn.SetActive(true);
+            //areaScript.closeBtn.SetActive(true);
         }
 
         
@@ -160,7 +160,7 @@ public class TutorialManager : MonoBehaviour
 
         if (currentIndex == 14 && isSearching) 
         {
-            tableAreaScript.closeBtn.SetActive(false);
+            //tableAreaScript.closeBtn.SetActive(false);
             ShowNextTutorial(15, shortDelay);
             tableSearchMarker.SetActive(false);
         }
@@ -168,7 +168,7 @@ public class TutorialManager : MonoBehaviour
         if (currentIndex == 15 && tableAreaScript.pickedEvidence)
         {
             ShowNextTutorial(16, shortDelay);
-            tableAreaScript.closeBtn.SetActive(true);
+            //tableAreaScript.closeBtn.SetActive(true);
         }
 
         if (currentIndex == 16 && !tableAreaScript.isDisplayed)
