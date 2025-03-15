@@ -16,6 +16,8 @@ public class EvidenceManager : MonoBehaviour
     public static EvidenceManager instance;
     public List<EvidenceCheck> evidenceSpriteList = new List<EvidenceCheck>();
     [HideInInspector] public bool photoFound;
+    [HideInInspector] public int numEvidenceFound = 0;
+    public GameObject exitTrigger;
 
     private void Awake()
     {
@@ -35,6 +37,7 @@ public class EvidenceManager : MonoBehaviour
     void Update()
     {
         if (photoFound) PhotoCheckMark();
+        if (numEvidenceFound == 4) exitTrigger.SetActive(true);
     }
 
     void PhotoCheckMark()
@@ -44,6 +47,7 @@ public class EvidenceManager : MonoBehaviour
             if (photoEvidence.evidence.sprite == photoEvidence.uncheckedSprite)
             {
                 photoEvidence.evidence.sprite = photoEvidence.checkedSprite;
+                numEvidenceFound++;
             }
         
     }

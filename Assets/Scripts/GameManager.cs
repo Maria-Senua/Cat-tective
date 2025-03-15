@@ -72,6 +72,11 @@ public class GameManager : MonoBehaviour
         FindObjectOfType<ScenesController>().StartCrimeLevel();
     }
 
+    public void TriggerFinalScene()
+    {
+        FindObjectOfType<ScenesController>().ShowFinalCutScene();
+    }
+
     public void WaitForInventoryClose(DraggableItem item1, DraggableItem item2)
     {
         StartCoroutine(WaitForInventoryCloseCoroutine(item1, item2));

@@ -71,6 +71,11 @@ public class ScenesController : MonoBehaviour
         //Cursor.lockState = CursorLockMode.Locked;
     }
 
+    public void ShowFinalCutScene()
+    {
+        SceneManager.LoadScene("FinalCutScene");
+    }
+
     public void StartCrimeLevel()
     {
         

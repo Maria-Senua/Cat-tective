@@ -23,6 +23,7 @@ TagManager:
   - partD
   - Reader
   - Clock
+  - Exit
   layers:
   - Default
   - TransparentFX

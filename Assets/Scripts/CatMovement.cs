@@ -244,6 +244,11 @@ public class CatMovement : MonoBehaviour
             GameManager.sharedInstance.TriggerCrimeScene();
             LevelManager.sharedInstance.NextLevel();
         }
+
+        if (other.gameObject.CompareTag("Exit"))
+        {
+            GameManager.sharedInstance.TriggerFinalScene();
+        }
     }
 
     private void OnTriggerExit(Collider other)
