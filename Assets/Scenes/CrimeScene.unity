@@ -2411,6 +2411,11 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.033013977, y: 0.02, z: 0.16137733}
   m_Center: {x: 0.0005855654, y: 0.00005198829, z: 0.041632637}
+--- !u!1 &262886336 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 58e5c91eed95c42d19041d0335df0656, type: 3}
+  m_PrefabInstance: {fileID: 1891074783}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &270214137
 GameObject:
   m_ObjectHideFlags: 0
@@ -3104,6 +3109,7 @@ MonoBehaviour:
   pickedEvidence: 0
   newsMarker: {fileID: 0}
   clockTrigger: {fileID: 0}
+  areaMarker: {fileID: 1607137279}
   evidences:
   - {fileID: 682158074}
 --- !u!65 &370797297
@@ -3789,6 +3795,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 431775534}
   m_CullTransparentMesh: 1
+--- !u!1 &462087122 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 58e5c91eed95c42d19041d0335df0656, type: 3}
+  m_PrefabInstance: {fileID: 1264138786}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &465020046 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -8856916482769721425, guid: a6252440f971244f69d9ffce9e72d08b, type: 3}
@@ -7141,6 +7152,7 @@ MonoBehaviour:
   pickedEvidence: 0
   newsMarker: {fileID: 0}
   clockTrigger: {fileID: 0}
+  areaMarker: {fileID: 916981477}
   evidences:
   - {fileID: 571251182}
 --- !u!1 &775130084
@@ -8961,6 +8973,7 @@ MonoBehaviour:
   pickedEvidence: 0
   newsMarker: {fileID: 0}
   clockTrigger: {fileID: 0}
+  areaMarker: {fileID: 0}
   evidences: []
 --- !u!1 &900706717
 GameObject:
@@ -9199,6 +9212,11 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!1 &916981477 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 58e5c91eed95c42d19041d0335df0656, type: 3}
+  m_PrefabInstance: {fileID: 1324831751}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &952378751 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -5751949428428801006, guid: a6252440f971244f69d9ffce9e72d08b, type: 3}
@@ -10454,6 +10472,7 @@ MonoBehaviour:
   pickedEvidence: 0
   newsMarker: {fileID: 0}
   clockTrigger: {fileID: 0}
+  areaMarker: {fileID: 0}
   evidences:
   - {fileID: 1422856779}
 --- !u!1 &1124291375
@@ -11008,6 +11027,7 @@ MonoBehaviour:
   pickedEvidence: 0
   newsMarker: {fileID: 0}
   clockTrigger: {fileID: 0}
+  areaMarker: {fileID: 462087122}
   evidences:
   - {fileID: 1808330846}
 --- !u!65 &1192402754
@@ -11856,7 +11876,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 58e5c91eed95c42d19041d0335df0656, type: 3}
       propertyPath: m_Name
-      value: searchMarkerA
+      value: searchMarkerD
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -14404,7 +14424,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 58e5c91eed95c42d19041d0335df0656, type: 3}
       propertyPath: m_Name
-      value: searchMarkerA
+      value: searchMarkerB
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -15068,6 +15088,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1599301950}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1607137279 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 58e5c91eed95c42d19041d0335df0656, type: 3}
+  m_PrefabInstance: {fileID: 1505145105}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1610718208
 GameObject:
   m_ObjectHideFlags: 0
@@ -17632,7 +17657,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 58e5c91eed95c42d19041d0335df0656, type: 3}
       propertyPath: m_Name
-      value: searchMarkerA
+      value: searchMarkerC
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -18423,6 +18448,7 @@ MonoBehaviour:
   pickedEvidence: 0
   newsMarker: {fileID: 0}
   clockTrigger: {fileID: 0}
+  areaMarker: {fileID: 0}
   evidences:
   - {fileID: 30982088}
 --- !u!136 &1990244964
@@ -19424,6 +19450,7 @@ MonoBehaviour:
   pickedEvidence: 0
   newsMarker: {fileID: 0}
   clockTrigger: {fileID: 0}
+  areaMarker: {fileID: 262886336}
   evidences:
   - {fileID: 502433727}
 --- !u!65 &2082423953

@@ -15,6 +15,8 @@ public class AreaActions : MonoBehaviour
     public GameObject newsMarker;
     public GameObject clockTrigger;
 
+    public GameObject areaMarker;
+
     public GameObject[] evidences;
     private GameObject currentEvidence;
 
@@ -112,6 +114,7 @@ public class AreaActions : MonoBehaviour
             {
                 evidence.SetActive(false);
                 pickedEvidence = true;
+                areaMarker.SetActive(false);
             }
                 
             DraggableItem draggable = evidence.GetComponent<DraggableItem>();
