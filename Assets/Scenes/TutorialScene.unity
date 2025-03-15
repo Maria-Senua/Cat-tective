@@ -579,6 +579,7 @@ MonoBehaviour:
   pauseScreen: {fileID: 73060617}
   isPaused: 0
   timeTravelTime: 0
+  finalVideoTime: 4
 --- !u!114 &35471810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1421,8 +1422,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.014309229, y: 0.021260202, z: 0.0061846827}
-  m_Center: {x: -0.0055800616, y: -0.00063009834, z: 0.0074215243}
+  m_Size: {x: 0.014309229, y: 0.021260202, z: 0.0128947655}
+  m_Center: {x: -0.0055800616, y: -0.00063009834, z: 0.004066494}
 --- !u!23 &133907002
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -6668,6 +6669,7 @@ MonoBehaviour:
   pickedEvidence: 0
   newsMarker: {fileID: 0}
   clockTrigger: {fileID: 0}
+  areaMarker: {fileID: 0}
   evidences: []
 --- !u!1 &900706717
 GameObject:
@@ -6839,6 +6841,7 @@ MonoBehaviour:
   cameraTrans: {fileID: 963194228}
   cameraPivot: {fileID: 900706721}
   catMainCam: {fileID: 963194227}
+  vaultDuration: 0.5
   mouseSensitivity: 2
   verticalRotationLimit: 80
   cameraResetSpeed: 5
@@ -7947,6 +7950,7 @@ MonoBehaviour:
   pickedEvidence: 0
   newsMarker: {fileID: 0}
   clockTrigger: {fileID: 0}
+  areaMarker: {fileID: 0}
   evidences:
   - {fileID: 1422856779}
 --- !u!1 &1124291375
@@ -13866,6 +13870,7 @@ MonoBehaviour:
   pickedEvidence: 0
   newsMarker: {fileID: 0}
   clockTrigger: {fileID: 0}
+  areaMarker: {fileID: 0}
   evidences:
   - {fileID: 30982088}
 --- !u!136 &1990244964

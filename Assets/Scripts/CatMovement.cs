@@ -40,6 +40,7 @@ public class CatMovement : MonoBehaviour
     public Camera catMainCam;
     private float catHeight = 2.5f;
     private float catRadius = 0.5f;
+    public float vaultDuration = 1f;
 
     public float mouseSensitivity = 2.0f;
     public float verticalRotationLimit = 80f;
@@ -302,74 +303,64 @@ public class CatMovement : MonoBehaviour
     {
         float time = 0;
         Vector3 startPos = transform.position;
+
         playerRigid.isKinematic = true;
+        Collider playerCollider = GetComponent<Collider>();
+        playerCollider.enabled = false;
+
         isVaulting = true;
 
-        Collider playerCollider = GetComponent<Collider>();
-        Collider[] allColliders = FindObjectsOfType<Collider>();
-        foreach (var collider in allColliders)
+        try
         {
-            if (collider != playerCollider)
+            while (time < duration)
             {
-                Physics.IgnoreCollision(playerCollider, collider, true);  // Ignore collisions with all other colliders
+                float lerpRatio = time / duration;
+                Vector3 lerpedPosition = Vector3.Lerp(startPos, targetPos, lerpRatio);
+                playerRigid.MovePosition(lerpedPosition);
+
+                time += Time.deltaTime;
+                yield return null;
             }
-        }
 
-        gizmoTargetPos = targetPos;
-        showGizmo = true;
-        Debug.Log("START LERP");
-        while (time < duration)
+            playerRigid.MovePosition(targetPos); 
+        }
+        finally
         {
-            float lerpRatio = time / duration;
-            Vector3 lerpedPosition = Vector3.Lerp(startPos, targetPos, lerpRatio);
-
-            // Use Rigidbody to move the player while lerping
-            playerRigid.MovePosition(lerpedPosition);
-            time += Time.deltaTime;
-            yield return null;
+            playerCollider.enabled = true;
+            playerRigid.isKinematic = false;
+            isVaulting = false;
         }
-        Debug.Log("FINISH LERP");
-        playerRigid.MovePosition(targetPos);
-        foreach (var collider in allColliders)
-        {
-            if (collider != playerCollider)
-            {
-                Physics.IgnoreCollision(playerCollider, collider, false);
-            }
-        }
-
-        Invoke("UndoKinematic", 0.2f);
-        //showGizmo = false;
-    }
-
-    private void UndoKinematic()
-    {
-        playerRigid.isKinematic = false;
-        isVaulting = false;
-        showGizmo = false;
     }
 
     private void Vault()
     {
+        if (isVaulting) return;
+
         if (Physics.Raycast(catMainCam.transform.position, catMainCam.transform.forward, out var firstHit, 1f, vaultLayer))
         {
-            if (Physics.Raycast(firstHit.point + (catMainCam.transform.forward * catRadius * 0.5f) + (Vector3.up * 0.1f * catHeight), Vector3.down, out var secondHit, catHeight))
+            Vector3 offset = (catMainCam.transform.forward * catRadius * 0.5f) + (Vector3.up * 0.1f * catHeight);
+
+            if (Physics.Raycast(firstHit.point + offset, Vector3.down, out var secondHit, catHeight))
             {
+                Vector3 finalPosition = secondHit.point + Vector3.up * 0.1f;
+
+                gizmoTargetPos = finalPosition; 
                 isVaulting = true;
-                StartCoroutine(LerpVault(secondHit.point, 0.5f));
+                StartCoroutine(LerpVault(finalPosition, vaultDuration));
             }
         }
     }
 
     private void OnDrawGizmos()
     {
-        if (showGizmo)
+        if (showGizmo && gizmoTargetPos != Vector3.zero)
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawSphere(gizmoTargetPos, 0.02f); // Draw a small sphere at the target position
-            Gizmos.DrawLine(transform.position, gizmoTargetPos); // Draw a line from the current position to target
+            Gizmos.DrawSphere(gizmoTargetPos, 0.1f); // Draw sphere at target
+            Gizmos.DrawLine(transform.position, gizmoTargetPos); // Line to target
         }
     }
+
 
 
 
