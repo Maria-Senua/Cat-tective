@@ -107,6 +107,10 @@ public class CatMovement : MonoBehaviour
 
                 playerRigid.AddForce(transform.up * climb_speed, ForceMode.Force);
                 isClimbing = true; // Set climbing flag to true
+                Debug.Log("TutorialClimbcheck IsOnWall: " + isOnWall);
+                Debug.Log("TutorialClimbcheck IsClimbing: " + isClimbing);
+                Debug.Log("TutorialClimbcheck W Key Pressed: " + Input.GetKey(KeyCode.W));
+
                 if (LevelManager.sharedInstance.currentLevel == 1 && TutorialManager.sharedInstance != null) TutorialManager.sharedInstance.startClimbing = true;
             }
             else
@@ -150,8 +154,8 @@ public class CatMovement : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        if (!isGrounded)
-        {
+        //if (!isGrounded)
+        //{
             if (collision.gameObject.CompareTag("Climb"))
             {
                
@@ -161,7 +165,7 @@ public class CatMovement : MonoBehaviour
                 
                    
             }
-        }
+        //}
 
         if (collision.gameObject.CompareTag("Ground"))
         {
