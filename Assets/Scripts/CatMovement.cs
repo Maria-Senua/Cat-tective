@@ -221,7 +221,7 @@ public class CatMovement : MonoBehaviour
             foolBar.gameObject.SetActive(true);
             isPlaying = true;
             //other.gameObject.SetActive(false);
-            if (LevelManager.sharedInstance.currentLevel != 2) TutorialManager.sharedInstance.startPlaying = true;
+            if (LevelManager.sharedInstance.currentLevel == 1) TutorialManager.sharedInstance.startPlaying = true;
             //trigger play anim
             playerAnim.SetTrigger("SitDown");
             playerAnim.SetTrigger("Sitting");
@@ -230,10 +230,10 @@ public class CatMovement : MonoBehaviour
         if (other.gameObject.CompareTag("Snake"))
         {
             isScared = true;
-            if (LevelManager.sharedInstance.currentLevel == 1 && TutorialManager.sharedInstance != null) TutorialManager.sharedInstance.isScared = true;
 
-            Vector3 direction = (transform.position - other.transform.position).normalized;
-            playerRigid.AddForce(direction * 15.0f, ForceMode.Impulse);
+            Vector3 backDirection = -transform.forward;
+            playerRigid.AddForce(backDirection * 50.0f + Vector3.up * 5.0f, ForceMode.Impulse); 
+            StartCoroutine(ResetJumpBack());
         }
 
         if (other.gameObject.CompareTag("Search"))
@@ -260,6 +260,12 @@ public class CatMovement : MonoBehaviour
         }
     }
 
+    private IEnumerator ResetJumpBack()
+    {
+        yield return new WaitForSeconds(1.5f); // Wait before allowing movement again
+        isScared = false;
+    }
+
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.CompareTag("Sun"))
@@ -277,8 +283,7 @@ public class CatMovement : MonoBehaviour
        
         if (other.gameObject.CompareTag("Snake"))
         {
-            isScared = false;
-            if (LevelManager.sharedInstance.currentLevel == 1 && TutorialManager.sharedInstance != null) TutorialManager.sharedInstance.isScared = false;
+            //isScared = false;
 
         }
 
