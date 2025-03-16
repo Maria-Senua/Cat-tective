@@ -37,12 +37,12 @@ public class EvidenceManager : MonoBehaviour
     void Update()
     {
         if (photoFound) PhotoCheckMark();
-        if (numEvidenceFound == 4) exitTrigger.SetActive(true);
+        if (numEvidenceFound == 3) exitTrigger.SetActive(true);
     }
 
     void PhotoCheckMark()
     {
-        var photoEvidence = evidenceSpriteList[3];
+        var photoEvidence = evidenceSpriteList[2];
        
             if (photoEvidence.evidence.sprite == photoEvidence.uncheckedSprite)
             {
