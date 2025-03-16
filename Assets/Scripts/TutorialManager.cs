@@ -126,47 +126,56 @@ public class TutorialManager : MonoBehaviour
             }
         }
 
-      
-
-        AreaActions areaScript = investigationArea.GetComponent<AreaActions>();
-
-   
-
-        if (currentIndex == 11 && isSearching) 
+        if (investigationArea != null)
         {
-            ShowNextTutorial(12, shortDelay);
+
+
+
+            AreaActions areaScript = investigationArea.GetComponent<AreaActions>();
+
+
+
+            if (currentIndex == 11 && isSearching)
+            {
+                ShowNextTutorial(12, shortDelay);
+            }
+
+            if (currentIndex == 12 && areaScript.pickedEvidence)
+            {
+                ShowNextTutorial(13, shortDelay);
+            }
+
+
+
+            if (!areaScript.isDisplayed && currentIndex == 13)
+            {
+                isSearching = false;
+                ShowNextTutorial(14, shortDelay);
+                tableSearchMarker.SetActive(true);
+            }
         }
 
-        if (currentIndex == 12 && areaScript.pickedEvidence)
+        if (tableSearchArea != null)
         {
-            ShowNextTutorial(13, shortDelay);
-        }
-
-        
-
-        if (!areaScript.isDisplayed && currentIndex == 13)
-        {
-            isSearching = false;
-            ShowNextTutorial(14, shortDelay);
-            tableSearchMarker.SetActive(true);
-        }
 
 
-        AreaActions tableAreaScript = tableSearchArea.GetComponent<AreaActions>();
 
-        if (currentIndex == 14 && isSearching) 
-        {
-            ShowNextTutorial(15, shortDelay);
-        }
+            AreaActions tableAreaScript = tableSearchArea.GetComponent<AreaActions>();
 
-        if (currentIndex == 15 && tableAreaScript.pickedEvidence)
-        {
-            ShowNextTutorial(16, shortDelay);
-        }
+            if (currentIndex == 14 && isSearching)
+            {
+                ShowNextTutorial(15, shortDelay);
+            }
 
-        if (currentIndex == 16 && !tableAreaScript.isDisplayed)
-        {
-            ShowNextTutorial(17, shortDelay);
+            if (currentIndex == 15 && tableAreaScript.pickedEvidence)
+            {
+                ShowNextTutorial(16, shortDelay);
+            }
+
+            if (currentIndex == 16 && !tableAreaScript.isDisplayed)
+            {
+                ShowNextTutorial(17, shortDelay);
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.I) && currentIndex == 17)
