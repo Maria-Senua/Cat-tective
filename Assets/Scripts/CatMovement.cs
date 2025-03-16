@@ -27,6 +27,7 @@ public class CatMovement : MonoBehaviour
     private bool isInvestigating = false;
     private bool isInInventory = false;
     private GameObject currentInvestigationArea;
+    private VoicePlayTrigger voice;
 
     private Coroutine sunCoroutine;
 
@@ -61,6 +62,11 @@ public class CatMovement : MonoBehaviour
     private Vector3 gizmoTargetPos;
     private bool showGizmo = false;
 
+    private void Awake()
+    {
+        voice = FindObjectOfType<VoicePlayTrigger>();
+    }
+
     void Start()
     {
         //Cursor.lockState = CursorLockMode.Locked;
@@ -74,6 +80,8 @@ public class CatMovement : MonoBehaviour
         initialSoberTime = soberUpTime;
         initialBeSeriousTime = beSeriousTime;
         foolBar.gameObject.SetActive(false);
+
+        if (LevelManager.sharedInstance.currentLevel == 1) voice.PlayCatVoice(0);
     }
 
     void FixedUpdate()
