@@ -9,7 +9,7 @@ public class CatMovement : MonoBehaviour
 {
     public Animator playerAnim;
     public Rigidbody playerRigid;
-    public float walk_speed, walkback_speed, oldwalk_speed, run_speed, rotate_speed;
+    public float walk_speed, walkback_speed, oldwalk_speed, run_speed, rotate_speed, climb_speed;
     public bool walking;
     public Vector3 jump;
     public Vector3 jumpOff;
@@ -20,6 +20,7 @@ public class CatMovement : MonoBehaviour
     public bool isOnWall;
     private bool isVaulting = false;
     private bool isClimbing = false;
+    private bool movingSideways = false;
     private bool isSunDrunk = false;
     private bool isPlaying = false;
     private bool isScared = false;
@@ -104,7 +105,7 @@ public class CatMovement : MonoBehaviour
                 velocity = new Vector3(velocity.x, 0, velocity.z); 
                 playerRigid.velocity = velocity;
 
-                playerRigid.AddForce(transform.up * walk_speed, ForceMode.Force);
+                playerRigid.AddForce(transform.up * climb_speed, ForceMode.Force);
                 isClimbing = true; // Set climbing flag to true
                 if (LevelManager.sharedInstance.currentLevel == 1 && TutorialManager.sharedInstance != null) TutorialManager.sharedInstance.startClimbing = true;
             }
@@ -540,10 +541,41 @@ public class CatMovement : MonoBehaviour
         
     }
 
+    
+
     void MoveOnWall()
     {
-       
+        Vector3 sideForce = Vector3.zero;
+
+        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D))
+        {
+           
+            movingSideways = true;
+        }
+
+        if (Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D))
+        {
+        
+            movingSideways = false;
+
+            playerRigid.velocity = Vector3.zero;
+        }
+
+        if (movingSideways)
+        {
+            if (Input.GetKey(KeyCode.A))
+            {
+                sideForce = -transform.right * walk_speed * Time.deltaTime;
+            }
+            if (Input.GetKey(KeyCode.D))
+            {
+                sideForce = transform.right * walk_speed * Time.deltaTime;
+            }
+
+            playerRigid.AddForce(sideForce, ForceMode.Force);
+        }
     }
+
 
     private void ReturnToNormalState(ref float timer, float initialTimer, ref bool state, Action onZero)
     {
