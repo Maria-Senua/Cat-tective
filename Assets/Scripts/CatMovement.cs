@@ -280,12 +280,7 @@ public class CatMovement : MonoBehaviour
             if (LevelManager.sharedInstance.currentLevel == 1 && TutorialManager.sharedInstance != null) TutorialManager.sharedInstance.startChilling = false;
             soberUpTime = initialSoberTime;
         }
-       
-        if (other.gameObject.CompareTag("Snake"))
-        {
-            //isScared = false;
 
-        }
 
         if (other.gameObject.CompareTag("Search"))
         {
@@ -419,15 +414,15 @@ public class CatMovement : MonoBehaviour
 
                     if (Input.GetKey(KeyCode.D)) 
                     {
-                        jumpDirection = Vector3.left + jump;
+                        jumpDirection = transform.right + jump;
                     }
                     else if (Input.GetKey(KeyCode.A)) 
                     {
-                        jumpDirection = Vector3.right + jump;
+                        jumpDirection = -transform.right + jump;
                     }
                     else if (Input.GetKey(KeyCode.S)) 
                     {
-                        jumpDirection = Vector3.down;
+                        jumpDirection = -transform.forward + jump;
                     }
 
                     playerRigid.AddForce(jumpDirection.normalized * jumpForce, ForceMode.Impulse);
