@@ -24,7 +24,7 @@ public class ScenesController : MonoBehaviour
 
     private void Start()
     {
-        Resume();
+        //Resume();
     }
 
     private void Update()
@@ -67,7 +67,7 @@ public class ScenesController : MonoBehaviour
         LevelManager.sharedInstance.SetLevel(1);
         LevelManager.sharedInstance.StartSelectedLevel();
         SceneManager.LoadScene("TutorialScene");
-        pauseScreen.SetActive(false);
+        //pauseScreen.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
         Time.timeScale = 1f;  
     }

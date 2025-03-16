@@ -122,8 +122,7 @@ public class TutorialManager : MonoBehaviour
             {
                 ShowNextTutorial(11, shortDelay);
                 investigationMarker.SetActive(true); //add to the marker img text press E
-                investigationArea.SetActive(true);
-                photoPart.SetActive(true);
+                
             }
         }
 
@@ -135,15 +134,12 @@ public class TutorialManager : MonoBehaviour
 
         if (currentIndex == 11 && isSearching) 
         {
-            //areaScript.closeBtn.SetActive(false);
             ShowNextTutorial(12, shortDelay);
-            investigationMarker.SetActive(false);
         }
 
         if (currentIndex == 12 && areaScript.pickedEvidence)
         {
             ShowNextTutorial(13, shortDelay);
-            //areaScript.closeBtn.SetActive(true);
         }
 
         
@@ -152,23 +148,20 @@ public class TutorialManager : MonoBehaviour
         {
             isSearching = false;
             ShowNextTutorial(14, shortDelay);
-            tableSearchArea.SetActive(true);
             tableSearchMarker.SetActive(true);
         }
+
 
         AreaActions tableAreaScript = tableSearchArea.GetComponent<AreaActions>();
 
         if (currentIndex == 14 && isSearching) 
         {
-            //tableAreaScript.closeBtn.SetActive(false);
             ShowNextTutorial(15, shortDelay);
-            tableSearchMarker.SetActive(false);
         }
 
         if (currentIndex == 15 && tableAreaScript.pickedEvidence)
         {
             ShowNextTutorial(16, shortDelay);
-            //tableAreaScript.closeBtn.SetActive(true);
         }
 
         if (currentIndex == 16 && !tableAreaScript.isDisplayed)

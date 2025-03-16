@@ -6173,7 +6173,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -4960584510277547667, guid: a6252440f971244f69d9ffce9e72d08b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -4960584510277547667, guid: a6252440f971244f69d9ffce9e72d08b, type: 3}
       propertyPath: m_TagString
@@ -6237,7 +6237,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -1558721567721526513, guid: a6252440f971244f69d9ffce9e72d08b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -1558721567721526513, guid: a6252440f971244f69d9ffce9e72d08b, type: 3}
       propertyPath: m_TagString
@@ -8134,7 +8134,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!65 &1117990401
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8242,7 +8242,7 @@ MonoBehaviour:
   pickedEvidence: 0
   newsMarker: {fileID: 0}
   clockTrigger: {fileID: 0}
-  areaMarker: {fileID: 0}
+  areaMarker: {fileID: 373032615}
   evidences:
   - {fileID: 1422856779}
 --- !u!1 &1124291375
@@ -14163,7 +14163,7 @@ MonoBehaviour:
   pickedEvidence: 0
   newsMarker: {fileID: 0}
   clockTrigger: {fileID: 0}
-  areaMarker: {fileID: 0}
+  areaMarker: {fileID: 1438915901}
   evidences:
   - {fileID: 30982088}
 --- !u!136 &1990244964
