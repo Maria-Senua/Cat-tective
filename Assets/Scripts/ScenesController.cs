@@ -22,11 +22,6 @@ public class ScenesController : MonoBehaviour
         sceneName = currentScene.name;
     }
 
-    private void Start()
-    {
-        //Resume();
-    }
-
     private void Update()
     {
         if (sceneName == "TimeTravelCutScene")
@@ -67,9 +62,20 @@ public class ScenesController : MonoBehaviour
         LevelManager.sharedInstance.SetLevel(1);
         LevelManager.sharedInstance.StartSelectedLevel();
         SceneManager.LoadScene("TutorialScene");
-        //pauseScreen.SetActive(false);
         Cursor.lockState = CursorLockMode.Locked;
-        Time.timeScale = 1f;  
+        Time.timeScale = 1f;
+
+        if (TutorialManager.sharedInstance != null)
+        {
+            TutorialManager.sharedInstance.currentIndex = 0;
+            TutorialManager.sharedInstance.ActivateTutorial(0);
+            TutorialManager.sharedInstance.startClimbing = false;
+            TutorialManager.sharedInstance.startChilling = false;
+            TutorialManager.sharedInstance.startPlaying = false;
+            TutorialManager.sharedInstance.isSearching = false;
+            TutorialManager.sharedInstance.solvedPuzzle = false;
+            TutorialManager.sharedInstance.foundWatch = false;
+        }
     }
 
     public void ShowTimeTravelScene()
@@ -125,7 +131,12 @@ public class ScenesController : MonoBehaviour
         Time.timeScale = 1;
         SceneManager.LoadScene("MainMenuScene");
         Cursor.lockState = CursorLockMode.None;
-        
+        if (pauseScreen != null)
+        {
+            pauseScreen.SetActive(false);
+            isPaused = false; 
+        }
+
     }
 
     public void QuitGame()

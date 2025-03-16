@@ -51,6 +51,7 @@ public class TutorialManager : MonoBehaviour
         LevelManager.sharedInstance.isTutorial = true;
         currentIndex = 0;
         ActivateTutorial(0);
+        Debug.Log("pausetutorial check currentIndex " + currentIndex);
     }
 
     // Update is called once per frame
@@ -202,7 +203,7 @@ public class TutorialManager : MonoBehaviour
         }
     }
 
-    private void ActivateTutorial(int index)
+    public void ActivateTutorial(int index)
     {
         if (index < 0 || index >= tutorials.Length) return;
 
