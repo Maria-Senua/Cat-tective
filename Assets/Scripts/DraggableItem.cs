@@ -197,7 +197,7 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
                 {
                     imageComponent.enabled = false;
                     imageComponent.sprite = correctCombinedSprite;
-                    imageComponent.SetNativeSize();
+                    //imageComponent.SetNativeSize();
                     imageComponent.enabled = true;
 
                     Debug.Log("Correct puzzle solved!");
