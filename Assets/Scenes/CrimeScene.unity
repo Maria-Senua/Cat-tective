@@ -8476,8 +8476,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.043643624, y: 0.0064423606, z: 0.009463027}
-  m_Center: {x: -0.006466522, y: 0.000000014901161, z: 2.328306e-10}
+  m_Size: {x: 0.043643624, y: 0.0064423606, z: 0.00888397}
+  m_Center: {x: -0.006466522, y: 0.000000014981932, z: 0.00028953166}
 --- !u!1 &758310852 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 711583219947294418, guid: a6252440f971244f69d9ffce9e72d08b, type: 3}
@@ -14560,8 +14560,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.04364383, y: 0.0064423643, z: 0.009463029}
-  m_Center: {x: -0.0000009536743, y: 0.000000014901161, z: 6.9849193e-10}
+  m_Size: {x: 0.04364383, y: 0.006442365, z: 0.0089704385}
+  m_Center: {x: -0.0000009543674, y: 0.000000014981932, z: 0.0002462991}
 --- !u!1 &1279811850
 GameObject:
   m_ObjectHideFlags: 0
@@ -22987,8 +22987,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.043643624, y: 0.0064423606, z: 0.009463027}
-  m_Center: {x: -0.006466522, y: 0.000000014901161, z: 2.328306e-10}
+  m_Size: {x: 0.043643624, y: 0.0064423606, z: 0.0088122515}
+  m_Center: {x: -0.006466522, y: 0.000000014981932, z: 0.00032539023}
 --- !u!1 &1942659222 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6374851534073479281, guid: 46c87b2599b0e4282abb5840fc6f3f83, type: 3}
@@ -25072,8 +25072,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.043643825, y: 0.0064423643, z: 0.009463029}
-  m_Center: {x: -0.0064674756, y: 0.0000000074491338, z: 2.3223526e-10}
+  m_Size: {x: 0.043643825, y: 0.006442365, z: 0.008990653}
+  m_Center: {x: -0.006467477, y: 0.00000000749288, z: 0.000236191}
 --- !u!1 &2120620829 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1526554761915109350, guid: 076879464bd682945aa7cd31ae139a36, type: 3}

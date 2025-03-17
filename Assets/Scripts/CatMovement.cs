@@ -63,14 +63,36 @@ public class CatMovement : MonoBehaviour
     private Vector3 gizmoTargetPos;
     private bool showGizmo = false;
 
+
+
     private void Awake()
     {
         voice = FindObjectOfType<VoicePlayTrigger>();
+
+        if (LevelManager.sharedInstance.currentLevel == 3)
+        {
+            Transform foolBarTransform = GameObject.Find("Canvas")?.transform.Find("FoolBar");
+
+            if (foolBarTransform != null)
+            {
+
+                foolBar = foolBarTransform.GetComponent<Image>(); 
+                Debug.Log("FoolBar  found!! in Canvas.");
+            }
+            else
+            {
+                Debug.Log("FoolBar not found in Canvas.");
+            }
+        }
+        
+
     }
 
     void Start()
     {
         //Cursor.lockState = CursorLockMode.Locked;
+       
+
         playerRigid = GetComponent<Rigidbody>();
         vaultLayer = LayerMask.NameToLayer("VaultLayer");
         vaultLayer = ~vaultLayer;
@@ -80,7 +102,7 @@ public class CatMovement : MonoBehaviour
         jumpForward = Vector3.forward;
         initialSoberTime = soberUpTime;
         initialBeSeriousTime = beSeriousTime;
-        foolBar.gameObject.SetActive(false);
+        //foolBar.gameObject.SetActive(false);
 
         if (LevelManager.sharedInstance.currentLevel == 1) voice.PlayCatVoice(0);
     }
@@ -226,10 +248,12 @@ public class CatMovement : MonoBehaviour
             foolBar.gameObject.SetActive(true);
             isPlaying = true;
             //other.gameObject.SetActive(false);
-            if (LevelManager.sharedInstance.currentLevel == 1) TutorialManager.sharedInstance.startPlaying = true;
+           
             //trigger play anim
             playerAnim.SetTrigger("SitDown");
             playerAnim.SetTrigger("Sitting");
+
+            if (LevelManager.sharedInstance.currentLevel == 1) TutorialManager.sharedInstance.startPlaying = true;
         }
 
         if (other.gameObject.CompareTag("Snake"))
@@ -255,7 +279,7 @@ public class CatMovement : MonoBehaviour
         }
         if (other.gameObject.CompareTag("Clock"))
         {
-            GameManager.sharedInstance.TriggerCrimeScene();
+            Invoke("GoToCrimeScene", 1f);
             LevelManager.sharedInstance.NextLevel();
         }
 
@@ -263,6 +287,11 @@ public class CatMovement : MonoBehaviour
         {
             GameManager.sharedInstance.TriggerFinalScene();
         }
+    }
+
+    private void GoToCrimeScene()
+    {
+        GameManager.sharedInstance.TriggerCrimeScene();
     }
 
     private IEnumerator ResetJumpBack()
@@ -384,6 +413,13 @@ public class CatMovement : MonoBehaviour
 
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
+
+        if (foolBar == null)
+        {
+            Debug.Log("FoolBar is missing or not found.");
+        }
+
+
 
         if (walking)
         {

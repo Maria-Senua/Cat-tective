@@ -93,7 +93,7 @@ public class ScenesController : MonoBehaviour
     public void StartCrimeLevel()
     {
         
-        LevelManager.sharedInstance.ResetLevelState();
+        //LevelManager.sharedInstance.ResetLevelState();
         InventoryManager.instance.ResetInventoryState();
         LevelManager.sharedInstance.SetLevel(3);
         LevelManager.sharedInstance.StartSelectedLevel();

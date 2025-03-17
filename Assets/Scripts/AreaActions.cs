@@ -199,6 +199,16 @@ public class AreaActions : MonoBehaviour
         
         
         isDisplayed = false;
+        foreach (GameObject evidence in evidences)
+        {
+            foreach (Transform child in evidence.transform)
+            {
+                if (child.gameObject.activeSelf)
+                {
+                    child.gameObject.SetActive(false);
+                }
+            }
+        }
     }
 
    
