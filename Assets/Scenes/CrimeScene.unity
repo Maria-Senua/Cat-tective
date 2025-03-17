@@ -19289,10 +19289,10 @@ MonoBehaviour:
     combinedSprite: {fileID: 21300000, guid: 03ac64643d4134f89ae93127829644de, type: 3}
   - evidenceName: lipstick
     evidenceSprite: {fileID: 21300000, guid: 7a4c1faf8eeac462abc7959f85d81b3b, type: 3}
-    combinedSprite: {fileID: 0}
+    combinedSprite: {fileID: 21300000, guid: 7a4c1faf8eeac462abc7959f85d81b3b, type: 3}
   - evidenceName: shoe
     evidenceSprite: {fileID: 21300000, guid: 9fa5c8c0693f94fad9f65814ecd8e231, type: 3}
-    combinedSprite: {fileID: 0}
+    combinedSprite: {fileID: 21300000, guid: 9fa5c8c0693f94fad9f65814ecd8e231, type: 3}
   pickedEvidences: []
   btn1: {fileID: 2125762858}
   btn2: {fileID: 1885979824}

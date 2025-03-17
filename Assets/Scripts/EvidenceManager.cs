@@ -30,7 +30,7 @@ public class EvidenceManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        Debug.Log("evidencelist is here!");
     }
 
     // Update is called once per frame
