@@ -43,6 +43,14 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     private void Start()
     {
+        if (!InventoryManager.instance)
+        {
+            Debug.LogError("InventoryManager instance is missing!");
+            return;
+        }
+
+        InventoryManager.instance.InitializeCombinedSprites();
+
         Debug.Log(gameObject.name + " has evidenceName: " + evidenceName);
 
         combinedSprite = InventoryManager.instance.GetCombinedSprite(evidenceName);

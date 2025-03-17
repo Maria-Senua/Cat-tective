@@ -80,7 +80,8 @@ public class ScenesController : MonoBehaviour
 
     public void ShowTimeTravelScene()
     {
-        InventoryManager.instance.ClearInventory();
+        //InventoryManager.instance.ClearInventory();
+        //InventoryManager.instance.InitializeCombinedSprites();
         SceneManager.LoadScene("TimeTravelCutScene");
         //Cursor.lockState = CursorLockMode.Locked;
     }
@@ -94,7 +95,8 @@ public class ScenesController : MonoBehaviour
     {
         
         //LevelManager.sharedInstance.ResetLevelState();
-        InventoryManager.instance.ResetInventoryState();
+     
+        //InventoryManager.instance.InitializeCombinedSprites();
         LevelManager.sharedInstance.SetLevel(3);
         LevelManager.sharedInstance.StartSelectedLevel();
         SceneManager.LoadScene("CrimeScene");
@@ -106,6 +108,9 @@ public class ScenesController : MonoBehaviour
     {
         LevelManager.sharedInstance.SetLevel(2);
         LevelManager.sharedInstance.StartSelectedLevel();
+        //InventoryManager.instance.ResetInventoryState();
+        //InventoryManager.instance.InitializeCombinedSprites();
+
         SceneManager.LoadScene("EmptyScene");
         //Cursor.lockState = CursorLockMode.Locked;
         Time.timeScale = 1f;

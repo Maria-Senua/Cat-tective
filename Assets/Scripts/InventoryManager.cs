@@ -37,6 +37,36 @@ public class InventoryManager : MonoBehaviour
     public GameObject part1, part2;
     public GameObject partA, partB, partC, partD;
 
+    private bool initialized = false;
+
+    public void InitializeCombinedSprites()
+    {
+        if (initialized) return;
+
+        combinedSprites.Clear();
+
+        foreach (var entry in evidenceSpriteList)
+        {
+            evidenceSprites[entry.evidenceName] = entry.evidenceSprite;
+
+            if (entry.combinedSprite != null)
+            {
+                combinedSprites[entry.evidenceName] = entry.combinedSprite;
+            }
+        }
+
+        initialized = true; // Prevent re-initialization
+    }
+
+    private void OnEnable()
+    {
+        if (instance != null)
+        {
+            instance.InitializeCombinedSprites();
+        }
+    }
+
+
     private void Awake()
     {
         if (instance == null)
@@ -152,23 +182,23 @@ public class InventoryManager : MonoBehaviour
 
     public void ResetInventoryState()
     {
-        pickedEvidences.Clear(); 
-        combinedSprites.Clear(); 
-        ClearInventory();        
+        //pickedEvidences.Clear(); 
+        //combinedSprites.Clear(); 
+        //ClearInventory();        
 
-        btn1.SetActive(false);
-        btn2.SetActive(false);
-        btnA.SetActive(false);
-        btnB.SetActive(false);
-        btnC.SetActive(false);
-        btnD.SetActive(false);
+        //btn1.SetActive(false);
+        //btn2.SetActive(false);
+        //btnA.SetActive(false);
+        //btnB.SetActive(false);
+        //btnC.SetActive(false);
+        //btnD.SetActive(false);
 
         if (placeholderImage != null)
         {
-            placeholderImage.enabled = false;
+            //placeholderImage.enabled = false;
             placeholderImage.sprite = defaultPlaceholderSprite;
-            placeholderImage.SetNativeSize();
-            placeholderImage.enabled = true;
+            //placeholderImage.SetNativeSize();
+            //placeholderImage.enabled = true;
         }
 
         Debug.Log("Inventory fully reset.");

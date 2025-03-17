@@ -69,7 +69,7 @@ public class LevelManager : MonoBehaviour
             {
                 ResetLevelState(); // Switch off tutorial mode for all future levels
                 InventoryManager.instance.ResetInventoryState();
-                InventoryManager.instance.ClearInventory();
+                //InventoryManager.instance.ClearInventory();
                 ResetDraggableItems();
             }
 
