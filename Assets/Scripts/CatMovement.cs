@@ -68,7 +68,7 @@ public class CatMovement : MonoBehaviour
     private void Awake()
     {
         voice = FindObjectOfType<VoicePlayTrigger>();
-
+        Debug.Log("ctacheck lvl " + LevelManager.sharedInstance.currentLevel);
         if (LevelManager.sharedInstance.currentLevel == 3)
         {
             Transform foolBarTransform = GameObject.Find("Canvas")?.transform.Find("FoolBar");

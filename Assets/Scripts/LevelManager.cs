@@ -120,10 +120,10 @@ public class LevelManager : MonoBehaviour
 
         foreach (DraggableItem item in draggableItems)
         {
-            Destroy(item.gameObject);  // 🔥 Destroy any leftover tutorial items
+            Destroy(item.gameObject);  
         }
 
-        Debug.Log("🗑️ Old draggable items fully destroyed!");
+        Debug.Log("Old draggable items fully destroyed!");
     }
 
 }

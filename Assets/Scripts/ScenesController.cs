@@ -93,16 +93,13 @@ public class ScenesController : MonoBehaviour
 
     public void StartCrimeLevel()
     {
-        
-        //LevelManager.sharedInstance.ResetLevelState();
-     
-        //InventoryManager.instance.InitializeCombinedSprites();
-        LevelManager.sharedInstance.SetLevel(3);
-        LevelManager.sharedInstance.StartSelectedLevel();
+        LevelManager.sharedInstance.currentLevel = 3;
+
         SceneManager.LoadScene("CrimeScene");
-        //Cursor.lockState = CursorLockMode.Locked;
-        Time.timeScale = 1f;
+
     }
+
+
 
     public void OpenEmptyScene()
     {
