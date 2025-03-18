@@ -24,6 +24,7 @@ TagManager:
   - Reader
   - Clock
   - Exit
+  - List
   layers:
   - Default
   - TransparentFX

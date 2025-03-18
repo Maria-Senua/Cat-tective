@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     public static GameManager sharedInstance;
     public bool isGamePaused;
     public bool inventoryOpen = false;
+    public GameObject evidenceList;
 
     private void Awake()
     {

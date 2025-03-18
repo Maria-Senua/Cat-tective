@@ -287,6 +287,14 @@ public class CatMovement : MonoBehaviour
         {
             GameManager.sharedInstance.TriggerFinalScene();
         }
+
+        if (other.gameObject.CompareTag("List"))
+        {
+            Debug.Log("listtrigger start");
+            GameManager.sharedInstance.evidenceList.SetActive(true);
+            Debug.Log("listtrigger " + GameManager.sharedInstance.evidenceList.activeInHierarchy);
+            Destroy(other.gameObject);
+        }
     }
 
     private void GoToCrimeScene()

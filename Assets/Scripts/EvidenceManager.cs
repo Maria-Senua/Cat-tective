@@ -17,7 +17,7 @@ public class EvidenceManager : MonoBehaviour
     public List<EvidenceCheck> evidenceSpriteList = new List<EvidenceCheck>();
     [HideInInspector] public bool photoFound;
     [HideInInspector] public int numEvidenceFound = 0;
-    public GameObject exitTrigger;
+    private GameObject exitTrigger;
 
     private void Awake()
     {
@@ -31,13 +31,35 @@ public class EvidenceManager : MonoBehaviour
     void Start()
     {
         Debug.Log("evidencelist is here!");
+        exitTrigger = FindInactiveObjectByTag("Exit");
+    }
+
+    GameObject FindInactiveObjectByTag(string tag)
+    {
+        GameObject[] allObjects = Resources.FindObjectsOfTypeAll<GameObject>();
+        foreach (GameObject obj in allObjects)
+        {
+            if (obj.CompareTag(tag))
+            {
+                return obj;
+            }
+        }
+        return null;
     }
 
     // Update is called once per frame
     void Update()
     {
         if (photoFound) PhotoCheckMark();
-        if (numEvidenceFound == 3 && LevelManager.sharedInstance.currentLevel == 3) exitTrigger.SetActive(true);
+        if (LevelManager.sharedInstance.currentLevel == 3)
+        {
+            Debug.Log("evidtrigger lvlcheck");
+            if (numEvidenceFound == 3 && exitTrigger != null)
+            {
+                Debug.Log("evidtrigger exitcheck");
+                exitTrigger.SetActive(true);
+            }
+        } 
     }
 
     void PhotoCheckMark()
