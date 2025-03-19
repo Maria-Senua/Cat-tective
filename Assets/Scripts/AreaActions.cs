@@ -19,6 +19,8 @@ public class AreaActions : MonoBehaviour
 
     public GameObject[] evidences;
     private GameObject currentEvidence;
+    public GameObject[] pieces;
+    private bool showPieces = false;
 
     // Start is called before the first frame update
     void Start()
@@ -102,6 +104,11 @@ public class AreaActions : MonoBehaviour
                         clockTrigger.SetActive(true);
                     }
                 }
+            }
+
+            if (evidence.tag == "Missing")
+            {
+                showPieces = true;
             }
             
         }
@@ -193,6 +200,21 @@ public class AreaActions : MonoBehaviour
 
     public void DeactivateView()
     {
+        if (LevelManager.sharedInstance.currentLevel == 3)
+        {
+            if (showPieces)
+            {
+                if (LevelManager.sharedInstance.currentLevel == 3)
+                {
+                    foreach (GameObject piece in pieces)
+                    {
+                        piece.SetActive(true);
+                    }
+                    areaMarker.SetActive(false);
+                }
+            }
+        }
+
         subCamera.enabled = false;
         catCamera.enabled = true;
 
