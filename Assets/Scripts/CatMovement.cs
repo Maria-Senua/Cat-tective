@@ -106,6 +106,7 @@ public class CatMovement : MonoBehaviour
 
         if (LevelManager.sharedInstance.currentLevel == 1) VoicePlayTrigger.instance.PlayCatVoice(0);
         if (LevelManager.sharedInstance.currentLevel == 2) VoicePlayTrigger.instance.PlayCatVoice(11);
+        if (LevelManager.sharedInstance.currentLevel == 3) VoicePlayTrigger.instance.PlayCatVoice(14);
     }
 
     void FixedUpdate()
@@ -267,7 +268,7 @@ public class CatMovement : MonoBehaviour
         if (other.gameObject.CompareTag("Snake"))
         {
             isScared = true;
-
+            VoicePlayTrigger.instance.PlayCatVoice(23);
             Vector3 backDirection = -transform.forward;
             playerRigid.AddForce(backDirection * 50.0f + Vector3.up * 5.0f, ForceMode.Impulse); 
             StartCoroutine(ResetJumpBack());
