@@ -30,6 +30,7 @@ public class CatMovement : MonoBehaviour
     private GameObject currentInvestigationArea;
     private VoicePlayTrigger voice;
     private bool isPlayingAudio = false;
+    private int lastTutorialIndex = -1;
 
     private Coroutine sunCoroutine;
 
@@ -525,24 +526,22 @@ public class CatMovement : MonoBehaviour
         }
         if (LevelManager.sharedInstance.currentLevel == 1)
         {
-            if (TutorialManager.sharedInstance.currentIndex == 11)
+            int currentIndex = TutorialManager.sharedInstance.currentIndex;
+
+            if (currentIndex != lastTutorialIndex) // Index changed
             {
-                if (!isPlayingAudio)
+                lastTutorialIndex = currentIndex; // Update last index
+
+                if (currentIndex == 11)
                 {
-                    isPlayingAudio = true;
                     voice.PlayCatVoice(4);
                 }
-            }
-            if (!voice.trigSource.isPlaying)
-            {
-                isPlayingAudio = false;
-            }
-            if (TutorialManager.sharedInstance.currentIndex == 13)
-            {
-                if (!isPlayingAudio)
+                else if (currentIndex == 13)
                 {
-                    isPlayingAudio = true;
                     voice.PlayCatVoice(6);
+                } else if (currentIndex == 14)
+                {
+                    voice.PlayCatVoice(7);
                 }
             }
         }
