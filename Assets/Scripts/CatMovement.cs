@@ -29,6 +29,7 @@ public class CatMovement : MonoBehaviour
     private bool isInInventory = false;
     private GameObject currentInvestigationArea;
     private VoicePlayTrigger voice;
+    private bool isPlayingAudio = false;
 
     private Coroutine sunCoroutine;
 
@@ -206,6 +207,7 @@ public class CatMovement : MonoBehaviour
             isGrounded = true;
             playerRigid.useGravity = true;
             Debug.Log("moving in collision");
+            isPlayingAudio = false;
         }
 
         if (!isGrounded)
@@ -216,6 +218,11 @@ public class CatMovement : MonoBehaviour
                 isGrounded = false;
                 //playerRigid.useGravity = false;
                 Debug.Log("Is climbing");
+                if (!isPlayingAudio)
+                {
+                    isPlayingAudio = true;
+                    voice.PlayCatVoice(1);
+                }
             }
         }
     }
@@ -228,6 +235,7 @@ public class CatMovement : MonoBehaviour
             isGrounded = false; 
             playerRigid.useGravity = true; 
             Debug.Log("Stop climb");
+            isPlayingAudio = false;
         }
     }
 
@@ -248,7 +256,7 @@ public class CatMovement : MonoBehaviour
             foolBar.gameObject.SetActive(true);
             isPlaying = true;
             //other.gameObject.SetActive(false);
-           
+            voice.PlayCatVoice(3);
             //trigger play anim
             playerAnim.SetTrigger("SitDown");
             playerAnim.SetTrigger("Sitting");
@@ -347,6 +355,7 @@ public class CatMovement : MonoBehaviour
         // Trigger chill animations
         playerAnim.SetTrigger("SitDown");
         playerAnim.SetTrigger("Sitting");
+        voice.PlayCatVoice(2);
     }
 
     private IEnumerator LerpVault(Vector3 targetPos, float duration)
