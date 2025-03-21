@@ -523,8 +523,33 @@ public class CatMovement : MonoBehaviour
             }
             
         }
+        if (LevelManager.sharedInstance.currentLevel == 1)
+        {
+            if (TutorialManager.sharedInstance.currentIndex == 11)
+            {
+                if (!isPlayingAudio)
+                {
+                    isPlayingAudio = true;
+                    voice.PlayCatVoice(4);
+                }
+            }
+            if (!voice.trigSource.isPlaying)
+            {
+                isPlayingAudio = false;
+            }
+            if (TutorialManager.sharedInstance.currentIndex == 13)
+            {
+                if (!isPlayingAudio)
+                {
+                    isPlayingAudio = true;
+                    voice.PlayCatVoice(6);
+                }
+            }
+        }
+       
 
-        if (catMainCam.isActiveAndEnabled) isInvestigating = false;
+
+            if (catMainCam.isActiveAndEnabled) isInvestigating = false;
         if (Input.GetKeyDown(KeyCode.I)) isInInventory = true;
         isInInventory = GameManager.sharedInstance.inventoryOpen;
     }
