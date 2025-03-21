@@ -28,7 +28,6 @@ public class CatMovement : MonoBehaviour
     private bool isInvestigating = false;
     private bool isInInventory = false;
     private GameObject currentInvestigationArea;
-    private VoicePlayTrigger voice;
     private bool isPlayingAudio = false;
     private int lastTutorialIndex = -1;
 
@@ -69,7 +68,6 @@ public class CatMovement : MonoBehaviour
 
     private void Awake()
     {
-        voice = FindObjectOfType<VoicePlayTrigger>();
         Debug.Log("ctacheck lvl " + LevelManager.sharedInstance.currentLevel);
         if (LevelManager.sharedInstance.currentLevel == 3)
         {
@@ -106,8 +104,8 @@ public class CatMovement : MonoBehaviour
         initialBeSeriousTime = beSeriousTime;
         //foolBar.gameObject.SetActive(false);
 
-        if (LevelManager.sharedInstance.currentLevel == 1) voice.PlayCatVoice(0);
-        if (LevelManager.sharedInstance.currentLevel == 2) voice.PlayCatVoice(11);
+        if (LevelManager.sharedInstance.currentLevel == 1) VoicePlayTrigger.instance.PlayCatVoice(0);
+        if (LevelManager.sharedInstance.currentLevel == 2) VoicePlayTrigger.instance.PlayCatVoice(11);
     }
 
     void FixedUpdate()
@@ -223,7 +221,7 @@ public class CatMovement : MonoBehaviour
                 if (!isPlayingAudio)
                 {
                     isPlayingAudio = true;
-                    voice.PlayCatVoice(1);
+                    VoicePlayTrigger.instance.PlayCatVoice(1);
                 }
             }
         }
@@ -258,7 +256,7 @@ public class CatMovement : MonoBehaviour
             foolBar.gameObject.SetActive(true);
             isPlaying = true;
             //other.gameObject.SetActive(false);
-            voice.PlayCatVoice(3);
+            VoicePlayTrigger.instance.PlayCatVoice(3);
             //trigger play anim
             playerAnim.SetTrigger("SitDown");
             playerAnim.SetTrigger("Sitting");
@@ -357,7 +355,7 @@ public class CatMovement : MonoBehaviour
         // Trigger chill animations
         playerAnim.SetTrigger("SitDown");
         playerAnim.SetTrigger("Sitting");
-        voice.PlayCatVoice(2);
+        VoicePlayTrigger.instance.PlayCatVoice(2);
     }
 
     private IEnumerator LerpVault(Vector3 targetPos, float duration)
@@ -535,18 +533,18 @@ public class CatMovement : MonoBehaviour
 
                 if (currentIndex == 11)
                 {
-                    voice.PlayCatVoice(4);
+                    VoicePlayTrigger.instance.PlayCatVoice(4);
                 }
                 else if (currentIndex == 13)
                 {
-                    voice.PlayCatVoice(6);
+                    VoicePlayTrigger.instance.PlayCatVoice(6);
                 } else if (currentIndex == 14)
                 {
-                    voice.PlayCatVoice(7);
+                    VoicePlayTrigger.instance.PlayCatVoice(7);
                 }
                 else if (currentIndex == 20)
                 {
-                    voice.PlayCatVoice(10);
+                    VoicePlayTrigger.instance.PlayCatVoice(10);
                 }
             }
         }

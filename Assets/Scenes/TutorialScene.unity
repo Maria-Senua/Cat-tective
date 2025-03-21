@@ -9437,10 +9437,9 @@ GameObject:
   - component: {fileID: 900706722}
   - component: {fileID: 900706723}
   - component: {fileID: 900706725}
-  - component: {fileID: 900706724}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9601,69 +9600,6 @@ MonoBehaviour:
   cameraResetSpeed: 5
   soberUpTime: 3
   beSeriousTime: 3
---- !u!114 &900706724
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 900706717}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 519a10ddfa59a414db4edd66cc30f883, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  trigSource: {fileID: 900706725}
-  voiceList:
-  - {fileID: 8300000, guid: d2ad34a6277c9499aa099dfe97e2f243, type: 3}
-  - {fileID: 8300000, guid: 652459fb4294345f0a3056ddb3688c7d, type: 3}
-  - {fileID: 8300000, guid: d086e02eb5c974514a5f700b048f70eb, type: 3}
-  - {fileID: 8300000, guid: aeb71578bc7a84626afa539d1b75dddb, type: 3}
-  - {fileID: 8300000, guid: b2e2ec3e906a94f8192654adf2a01782, type: 3}
-  - {fileID: 8300000, guid: 689f3c4dfb09c46e491fde54ba584b6a, type: 3}
-  - {fileID: 8300000, guid: 0c03b23b581fc44ed892572981e83564, type: 3}
-  - {fileID: 8300000, guid: b0588f5664d10454b971f1862ea52ae4, type: 3}
-  - {fileID: 8300000, guid: cec1700ebc62140ee8042a32b2631470, type: 3}
-  - {fileID: 8300000, guid: f2b8f0be797d945088856c49051b4821, type: 3}
-  - {fileID: 8300000, guid: 9ec07e7b895f741f0b2cf727a06021eb, type: 3}
-  - {fileID: 8300000, guid: bb9d2933a9edb4672a6475401407fabb, type: 3}
-  - {fileID: 8300000, guid: 44456792880a14806ad1cd4b123306cb, type: 3}
-  - {fileID: 8300000, guid: df22a807a8ebb4234b64744b7c374e2a, type: 3}
-  - {fileID: 8300000, guid: 018ca4576f84c4b0aa7e15618603d707, type: 3}
-  - {fileID: 8300000, guid: c32b5e52c27c1405590e4e257b0505f3, type: 3}
-  - {fileID: 8300000, guid: 6e04ac2e1992342c2b7b78f738174ba0, type: 3}
-  - {fileID: 8300000, guid: 556b2356f39ea496b963870f2af6e4ef, type: 3}
-  - {fileID: 8300000, guid: e65809a0c9f114f4998e9cea171cac08, type: 3}
-  - {fileID: 8300000, guid: 7f5ae4b189ba645fb97369f61f52c759, type: 3}
-  - {fileID: 8300000, guid: 9372cd471ac1b413c85377a355a70467, type: 3}
-  - {fileID: 8300000, guid: 680be917ee5934a3ea0e5a8480272b26, type: 3}
-  - {fileID: 8300000, guid: 24f1f0ad20bb54280bc0b3bba79f0fd8, type: 3}
-  - {fileID: 8300000, guid: c028df7543cb04996b6a432de9d6e5f9, type: 3}
-  subtitles:
-  - {fileID: 58774804}
-  - {fileID: 205064360}
-  - {fileID: 1567205615}
-  - {fileID: 1773492621}
-  - {fileID: 296352067}
-  - {fileID: 359099414}
-  - {fileID: 1148255783}
-  - {fileID: 2146033117}
-  - {fileID: 455485965}
-  - {fileID: 2012258355}
-  - {fileID: 56913573}
-  - {fileID: 120608281}
-  - {fileID: 116399558}
-  - {fileID: 1836810642}
-  - {fileID: 1671926898}
-  - {fileID: 411771154}
-  - {fileID: 1986751729}
-  - {fileID: 1795007842}
-  - {fileID: 854388660}
-  - {fileID: 1796690177}
-  - {fileID: 1448422311}
-  - {fileID: 166804274}
-  - {fileID: 1940715865}
-  - {fileID: 1480800816}
 --- !u!82 &900706725
 AudioSource:
   m_ObjectHideFlags: 0
@@ -15306,6 +15242,7 @@ GameObject:
   - component: {fileID: 1594509206}
   - component: {fileID: 1594509205}
   - component: {fileID: 1594509211}
+  - component: {fileID: 1594509212}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -15518,6 +15455,69 @@ MonoBehaviour:
   partB: {fileID: 1757838406}
   partC: {fileID: 313412748}
   partD: {fileID: 455629812}
+--- !u!114 &1594509212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1594509204}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 519a10ddfa59a414db4edd66cc30f883, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trigSource: {fileID: 900706725}
+  voiceList:
+  - {fileID: 8300000, guid: d2ad34a6277c9499aa099dfe97e2f243, type: 3}
+  - {fileID: 8300000, guid: 652459fb4294345f0a3056ddb3688c7d, type: 3}
+  - {fileID: 8300000, guid: d086e02eb5c974514a5f700b048f70eb, type: 3}
+  - {fileID: 8300000, guid: aeb71578bc7a84626afa539d1b75dddb, type: 3}
+  - {fileID: 8300000, guid: b2e2ec3e906a94f8192654adf2a01782, type: 3}
+  - {fileID: 8300000, guid: 689f3c4dfb09c46e491fde54ba584b6a, type: 3}
+  - {fileID: 8300000, guid: 0c03b23b581fc44ed892572981e83564, type: 3}
+  - {fileID: 8300000, guid: b0588f5664d10454b971f1862ea52ae4, type: 3}
+  - {fileID: 8300000, guid: cec1700ebc62140ee8042a32b2631470, type: 3}
+  - {fileID: 8300000, guid: f2b8f0be797d945088856c49051b4821, type: 3}
+  - {fileID: 8300000, guid: 9ec07e7b895f741f0b2cf727a06021eb, type: 3}
+  - {fileID: 8300000, guid: bb9d2933a9edb4672a6475401407fabb, type: 3}
+  - {fileID: 8300000, guid: 44456792880a14806ad1cd4b123306cb, type: 3}
+  - {fileID: 8300000, guid: df22a807a8ebb4234b64744b7c374e2a, type: 3}
+  - {fileID: 8300000, guid: 018ca4576f84c4b0aa7e15618603d707, type: 3}
+  - {fileID: 8300000, guid: c32b5e52c27c1405590e4e257b0505f3, type: 3}
+  - {fileID: 8300000, guid: 6e04ac2e1992342c2b7b78f738174ba0, type: 3}
+  - {fileID: 8300000, guid: 556b2356f39ea496b963870f2af6e4ef, type: 3}
+  - {fileID: 8300000, guid: e65809a0c9f114f4998e9cea171cac08, type: 3}
+  - {fileID: 8300000, guid: 7f5ae4b189ba645fb97369f61f52c759, type: 3}
+  - {fileID: 8300000, guid: 9372cd471ac1b413c85377a355a70467, type: 3}
+  - {fileID: 8300000, guid: 680be917ee5934a3ea0e5a8480272b26, type: 3}
+  - {fileID: 8300000, guid: 24f1f0ad20bb54280bc0b3bba79f0fd8, type: 3}
+  - {fileID: 8300000, guid: c028df7543cb04996b6a432de9d6e5f9, type: 3}
+  subtitles:
+  - {fileID: 58774804}
+  - {fileID: 205064360}
+  - {fileID: 1567205615}
+  - {fileID: 1773492621}
+  - {fileID: 296352067}
+  - {fileID: 359099414}
+  - {fileID: 1148255783}
+  - {fileID: 2146033117}
+  - {fileID: 455485965}
+  - {fileID: 2012258355}
+  - {fileID: 56913573}
+  - {fileID: 120608281}
+  - {fileID: 116399558}
+  - {fileID: 1836810642}
+  - {fileID: 1671926898}
+  - {fileID: 411771154}
+  - {fileID: 1986751729}
+  - {fileID: 1795007842}
+  - {fileID: 854388660}
+  - {fileID: 1796690177}
+  - {fileID: 1448422311}
+  - {fileID: 166804274}
+  - {fileID: 1940715865}
+  - {fileID: 1480800816}
 --- !u!1 &1599301950
 GameObject:
   m_ObjectHideFlags: 0
