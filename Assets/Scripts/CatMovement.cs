@@ -107,6 +107,7 @@ public class CatMovement : MonoBehaviour
         //foolBar.gameObject.SetActive(false);
 
         if (LevelManager.sharedInstance.currentLevel == 1) voice.PlayCatVoice(0);
+        if (LevelManager.sharedInstance.currentLevel == 2) voice.PlayCatVoice(11);
     }
 
     void FixedUpdate()
@@ -542,6 +543,10 @@ public class CatMovement : MonoBehaviour
                 } else if (currentIndex == 14)
                 {
                     voice.PlayCatVoice(7);
+                }
+                else if (currentIndex == 20)
+                {
+                    voice.PlayCatVoice(10);
                 }
             }
         }

@@ -26,6 +26,7 @@ TagManager:
   - Exit
   - List
   - Missing
+  - Subtitle
   layers:
   - Default
   - TransparentFX
