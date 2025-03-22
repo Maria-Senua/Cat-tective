@@ -21,6 +21,7 @@ public class AreaActions : MonoBehaviour
     private GameObject currentEvidence;
     public GameObject[] pieces;
     private bool showPieces = false;
+    private static int puzzlePiecesFound = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -110,7 +111,23 @@ public class AreaActions : MonoBehaviour
             {
                 showPieces = true;
             }
-            
+
+            if (evidence.tag == "Puzzle")
+            {
+                if (LevelManager.sharedInstance.currentLevel == 3)
+                {
+
+                    if (puzzlePiecesFound < 4) 
+                    {
+                        int voiceIndex = 18 + puzzlePiecesFound; 
+                        VoicePlayTrigger.instance.PlayCatVoice(voiceIndex);
+                        puzzlePiecesFound++; 
+
+                    }
+                }
+            }
+
+
         }
 
         if (Input.GetMouseButtonDown(1))
