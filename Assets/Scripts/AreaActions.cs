@@ -134,7 +134,7 @@ public class AreaActions : MonoBehaviour
         {
             string evidenceTag = evidence.tag;
 
-            if (evidenceTag != "Reader")
+            if (evidenceTag != "Reader" && evidenceTag != "Missing")
             {
                 evidence.SetActive(false);
                 pickedEvidence = true;
@@ -148,7 +148,7 @@ public class AreaActions : MonoBehaviour
             {
                 InventoryManager.instance?.AddEvidenceToInventory(evidence.name, true); // Puzzle items are draggable
             }
-            else
+            else if (evidenceTag != "Reader" && evidenceTag != "Missing" && evidenceTag != "Puzzle")
             {
                 InventoryManager.instance?.AddEvidenceToInventory(evidence.name, false); // Non-puzzle items are non-draggable
                 if (LevelManager.sharedInstance.currentLevel == 3)

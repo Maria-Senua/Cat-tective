@@ -19581,6 +19581,10 @@ PrefabInstance:
       value: MissingDisplay
       objectReference: {fileID: 0}
     - target: {fileID: -4737470438395771139, guid: 46c87b2599b0e4282abb5840fc6f3f83, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -4737470438395771139, guid: 46c87b2599b0e4282abb5840fc6f3f83, type: 3}
       propertyPath: m_TagString
       value: Missing
       objectReference: {fileID: 0}
