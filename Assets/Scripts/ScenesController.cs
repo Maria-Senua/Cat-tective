@@ -57,6 +57,11 @@ public class ScenesController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
 
+    public void ContinueGame()
+    {
+
+    }
+
     public void StartTutorial()
     {
         LevelManager.sharedInstance.SetLevel(1);
