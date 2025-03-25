@@ -59,7 +59,18 @@ public class ScenesController : MonoBehaviour
 
     public void ContinueGame()
     {
-
+        switch (LevelManager.sharedInstance.currentLevel)
+        {
+            case 1:
+                StartTutorial();
+                break;
+            case 2:
+                OpenEmptyScene();
+                break;
+            case 3:
+                StartCrimeLevel();
+                break;
+        }
     }
 
     public void StartTutorial()
