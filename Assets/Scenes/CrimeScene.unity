@@ -842,6 +842,7 @@ MonoBehaviour:
   isPaused: 0
   timeTravelTime: 0
   finalVideoTime: 4
+  continueBtn: {fileID: 0}
 --- !u!114 &35471810
 MonoBehaviour:
   m_ObjectHideFlags: 0
