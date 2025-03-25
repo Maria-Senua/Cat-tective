@@ -11,15 +11,15 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if (sharedInstance == null)
-        {
+        //if (sharedInstance == null)
+        //{
             sharedInstance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        //    DontDestroyOnLoad(gameObject);
+        //}
+        //else
+        //{
+        //    Destroy(gameObject);
+        //}
     }
 
     // Start is called before the first frame update

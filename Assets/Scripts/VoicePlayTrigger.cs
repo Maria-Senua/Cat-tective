@@ -13,16 +13,16 @@ public class VoicePlayTrigger : MonoBehaviour
 
     private void Awake()
     {
-        if (instance == null)
-        {
+        //if (instance == null)
+        //{
             instance = this;
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
             SceneManager.sceneLoaded += OnSceneLoaded;
-        }
-        else
-        {
-            Destroy(gameObject); // Prevent duplicates
-        }
+        //}
+        //else
+        //{
+        //    Destroy(gameObject); // Prevent duplicates
+        //}
         
     }
 
