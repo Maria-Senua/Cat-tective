@@ -38,7 +38,11 @@ public class ScenesController : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
             finalVideoTime -= Time.deltaTime;
 
-            if (finalVideoTime <= 0) GoToMenu();
+            if (finalVideoTime <= 0)
+            {
+                Cursor.lockState = CursorLockMode.None;
+                GoToMenu();
+            } 
         }
 
         switch (LevelManager.sharedInstance.currentLevel)
