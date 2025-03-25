@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class ScenesController : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class ScenesController : MonoBehaviour
     public float finalVideoTime = 4f;
     Scene currentScene;
     private string sceneName;
+    public Button continueBtn;
 
     private void Awake()
     {
@@ -37,6 +39,19 @@ public class ScenesController : MonoBehaviour
             finalVideoTime -= Time.deltaTime;
 
             if (finalVideoTime <= 0) GoToMenu();
+        }
+
+        switch (LevelManager.sharedInstance.currentLevel)
+        {
+            case 1:
+                continueBtn.interactable = false;
+                break;
+            case 2:
+                continueBtn.interactable = true;
+                break;
+            case 3:
+                continueBtn.interactable = true;
+                break;
         }
     }
 
@@ -62,7 +77,7 @@ public class ScenesController : MonoBehaviour
         switch (LevelManager.sharedInstance.currentLevel)
         {
             case 1:
-                StartTutorial();
+                //StartTutorial();
                 break;
             case 2:
                 OpenEmptyScene();
