@@ -158,6 +158,7 @@ public class AreaActions : MonoBehaviour
                         if (evidenceCheck.evidence.sprite == evidenceCheck.uncheckedSprite)
                         {
                             evidenceCheck.evidence.sprite = evidenceCheck.checkedSprite;
+                            evidenceCheck.evidence.SetNativeSize();
                             EvidenceManager.instance.numEvidenceFound++;
                             break; // Stop after finding the first match
                         }

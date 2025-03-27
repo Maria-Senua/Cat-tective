@@ -22,8 +22,8 @@ public class InventoryManager : MonoBehaviour
     public Transform itemPuzzleContent;
     public GameObject puzzleItemPrefab;
     public GameObject evidenceItemPrefab;
-    public Sprite defaultPlaceholderSprite; // Assign this in Unity Inspector
-    public Image placeholderImage; // Also assign this in Inspector
+    public Sprite defaultPlaceholderSprite; 
+    public Image placeholderImage;
 
     public List<EvidenceSprite> evidenceSpriteList = new List<EvidenceSprite>(); 
     public Dictionary<string, Sprite> evidenceSprites = new Dictionary<string, Sprite>();
@@ -149,8 +149,11 @@ public class InventoryManager : MonoBehaviour
                 //}
 
                 GameObject newItem = Instantiate(prefabToUse, parentTransform);
+                newItem.transform.localScale = isDraggable ? new Vector3(1.2f, 1.2f, 1.2f) : new Vector3(0.7f, 0.7f, 0.7f);
                 Image itemImage = newItem.GetComponent<Image>();
+                
                 itemImage.sprite = evidenceSprites[evidenceName];
+                
 
                 newItem.name = evidenceName;
 

@@ -69,6 +69,7 @@ public class EvidenceManager : MonoBehaviour
             if (photoEvidence.evidence.sprite == photoEvidence.uncheckedSprite)
             {
                 photoEvidence.evidence.sprite = photoEvidence.checkedSprite;
+                photoEvidence.evidence.SetNativeSize();
                 numEvidenceFound++;
             }
         
