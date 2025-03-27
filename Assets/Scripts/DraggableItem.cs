@@ -227,6 +227,7 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
                         {
                             EvidenceManager.instance.photoFound = true;
                             VoicePlayTrigger.instance.PlayCatVoice(22);
+                            InventoryManager.instance.mergedIcon.SetActive(true);
                         }
                             
                     }

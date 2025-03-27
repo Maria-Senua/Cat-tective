@@ -37,6 +37,8 @@ public class InventoryManager : MonoBehaviour
     public GameObject part1, part2;
     public GameObject partA, partB, partC, partD;
 
+    public GameObject mergedIcon;
+
     private bool initialized = false;
 
     public void InitializeCombinedSprites()
